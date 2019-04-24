@@ -1,0 +1,19 @@
+{
+  "name": "node-server",
+  "version": "1.0.0",
+  "description": "api + mock",
+  "main": "app.html",
+  "scripts": {
+    "raml": "raml2html api.raml > index.html",
+    "serve": "node app.js",
+    "mock": "osprey-mock-service -f api.raml -p 8081 --cors",
+    "mock-serve": "osprey-mock-service -f api.raml -p 8081 --cors | node app.js"
+  },
+  "author": "Saxon",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "osprey-mock-service": "^0.4.1",
+    "raml2html": "^7.3.0"
+  }
+}

@@ -1,0 +1,6713 @@
+#%RAML 1.0
+title: Wxmall
+version: 1
+mediaType: application/json
+
+types:
+  admin_token:
+    description: "管理员登录token"
+    required: true
+    type: "string"
+    example: "D535FF7B58E548D31E34E35A6F2DBB927F433A8CFC967B649816A4214A0CBBD5"
+  user_token:
+    description: "用户登录token"
+    required: true
+    type: "string"
+    example: "D535FF7B58E548D31E34E35A6F2DBB927F433A8CFC967B649816A4214A0CBBD5"
+  config_key:
+    description: "config的key"
+    required: true
+    type: "string"
+    example: "commoditySessionGoods"
+  store_id:
+    description: "storeID"
+    required: true
+    type: "number"
+    example: 12312
+  username:
+    description: "管理员用户名"
+    required: true
+    type: "string"
+    example: "admin"
+  password:
+    description: "管理员密码"
+    required: true
+    type: "string"
+    example: "admin"
+  order_id:
+    description: "订单ID"
+    required: true
+    type: "number"
+    example: 10123
+  reward_money_withdraw_request_id:
+    description: "提现ID"
+    required: true
+    type: "number"
+    example: 100102
+  withdraw_request_status:
+    description: "提现状态 (2表示withdraw_pending | 3表示withdraw_complete)"
+    required: true
+    type: "integer"
+    example: 2
+  user_id:
+    description: "用户ID"
+    required: true
+    type: "number"
+    example: 12311
+  goods_id:
+    description: "商品ID"
+    required: true
+    type: "number"
+    example: 12141
+  news_id:
+    description: "新闻ID"
+    required: true
+    type: "number"
+    example: 1221
+  news_category_id:
+    description: "新闻分类ID"
+    required: true
+    type: "number"
+    example: 12111
+  order_status:
+    description: "订单状态 (-1表示已取消 | 0表示待支付 | 1表示已支付 | 2表示已发货 | 4表示已完成 | 5表示可返现)"
+    required: false
+    type: "integer"
+    example: -1
+  store_type:
+    description: "store类型"
+    required: false
+    type: "string"
+    example: "customer"
+  store_subtype:
+    description: "store子类型"
+    required: false
+    type: "string"
+    example: "未知"
+  store_key:
+    description: "store的key"
+    required: false
+    type: "string"
+    example: "infantSession"
+  news_category_id_user:
+    description: "新闻分类ID"
+    required: false
+    type: "number"
+    example: 12111
+  notice_id:
+    description: "NoticeID"
+    required: true
+    type: "number"
+    example: 12314
+  notice_type:
+    description: "show(展示) | no_show(不展示)"
+    required: false
+    type: "string"
+    example: "show"
+  reward_money_withdraw_pending:
+    description: "提现金额"
+    required: ture
+    type: "number"
+    example: 100
+  file_name:
+    description: "文件名"
+    required: true
+    type: "string"
+    example: "qrcode1362524142888935187.jpg"
+  page:
+    description: "默认值为0, 并且从第0页开始"
+    required: false
+    type: "number"
+    example: 1
+  withdraw_log_page_size:
+    description: "默认值为10"
+    required: false
+    type: "number"
+    example: 2
+  page_size:
+    description: "默认值为50"
+    required: false
+    type: "number"
+    example: 2
+  address_id:
+    description: "地址ID"
+    required: true
+    type: "number"
+    example: 123121
+  category_id:
+    description: "分类ID"
+    required: true
+    type: "number"
+    example: 12313
+  tag_title:
+    description: "标签标题"
+    required: true
+    type: "string"
+    example: "热卖"
+  tag_id:
+    description: "标签ID"
+    required: true
+    type: "number"
+    example: 121
+  category_level:
+    description: "分类级别: 1表示一级分类, 2表示二级分类"
+    required: false
+    type: "integer"
+    example: 1
+  category_key:
+    description: "编号, 同一个一级类别下的类别标号相同"
+    required: false
+    type: "string"
+    example: "1"
+  goods_keyword:
+    description: "表示商品名称或者商品特性(模糊查询)"
+    required: false
+    type: "string"
+    example: "Annemarie Borlind安娜柏林再生洗面奶150ml | 温和的清洁皮肤和恢复失去的肌肤脂油. 针对30岁及以上的成熟性肌肤. 这款温和的洁面乳特别为干性, 缺乏水分滋养的皮肤设计"
+  goods_category_id:
+    description: "分类ID"
+    required: false
+    type: "number"
+    example: 1231
+  goods_key:
+    description: "编号，同一个一级类别下的类别标号相同"
+    required: false
+    type: "string"
+    example: "1"
+  goods_recommend_status:
+    description: "0表示普通 | 1表示推荐"
+    required: false
+    type: "integer"
+    example: 0
+  goods_page_size:
+    description: "默认值为10"
+    required: false
+    type: "number"
+    example: 2
+  sku_price_property:
+    description: "property_category_id:property_id"
+    required: true
+    type: "string"
+    example: "10450:41200"
+    
+  internal_error_list_response:
+    type: "object"
+    example: |
+      {
+        "code": -1,
+        "data": [],
+        "message": ""
+      }
+  internal_error_code_response:
+    type: "object"
+    example: |
+      {
+        "code": -1
+      }
+  internal_error_response:
+    type: "object"
+    example: |
+      {
+        "code": -1,
+        "data": {},
+        "message": ""
+      }
+  success_response:
+    type: "object"
+    example: |
+      {
+        "code": 0
+      }
+  required_missing_response:
+    type: "object"
+    example: |
+      {
+        "code": 1,
+        "data": {},
+        "message": ""
+      }
+  required_missing_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1,
+        "data": [],
+        "message": ""
+      }
+  required_misssing_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1
+      }
+  required_missing_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1
+      }
+  input_invalid_response:
+    type: "object"
+    example: |
+      {
+        "code": 2,
+        "data": {},
+        "message": ""
+      }
+  input_invalid_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 2,
+        "data": [],
+        "message": ""
+      }
+  input_invalid_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 2
+      }
+  no_such_user_response:
+    type: "object"
+    example: |
+      {
+        "code": 1000,
+        "data": {},
+        "message": ""
+      }
+  no_such_user_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1000,
+        "data": [],
+        "message": ""
+      }
+  no_such_user_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1000
+      }
+  login_token_invalid_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1001
+      }
+  invite_code_invalid_Response:
+    type: "object"
+    example: |
+      {
+        "code": 1002,
+        "data": {},
+        "message": ""
+      }
+  invite_code_invalid_code_Response:
+    type: "object"
+    example: |
+      {
+        "code": 1002
+      }
+
+  no_such_order_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1003,
+        "data": [],
+        "message": ""
+      }
+  no_such_order_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1003
+      }
+  no_such_order_response:
+    type: "object"
+    example: |
+      {
+        "code": 1003,
+        "data": {},
+        "message": ""
+      }
+  order_user_not_match_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1004
+      }
+  no_such_goods_response:
+    type: "object"
+    example: |
+      {
+        "code": 1008,
+        "data": {},
+        "message": ""
+      }
+  no_such_goods_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1008
+      }
+  no_such_goods_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1008,
+        "data": [],
+        "message": ""
+      }
+  no_address_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1010,
+        "data": [],
+        "message": ""
+      }
+  no_address_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1010
+      }
+  no_config_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1011,
+        "data": [],
+        "message": ""
+      }
+  no_config_response:
+    type: "object"
+    example: |
+      {
+        "code": 1011,
+        "data": {},
+        "message": ""
+      }
+  no_config_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1011
+      }
+  no_store_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1012,
+        "data": [],
+        "message": ""
+      }
+  no_store_response:
+    type: "object"
+    example: |
+      {
+        "code": 1012,
+        "data": {},
+        "message": ""
+      }
+  no_news_response:
+    type: "object"
+    example: |
+      {
+        "code": 1013,
+        "data": {},
+        "message": ""
+      }
+  no_news_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1013,
+        "data": [],
+        "message": ""
+      }
+  no_news_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1013
+      }
+  no_news_category_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1014,
+        "data": [],
+        "message": ""
+      }
+  no_news_category_response:
+    type: "object"
+    example: |
+      {
+        "code": 1014
+      }
+  no_notice_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1015
+      }
+  no_notice_response:
+    type: "object"
+    example: |
+      {
+        "code": 1015,
+        "data": {},
+        "message": ""
+      }
+  no_favorite_goods_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1016
+      }
+  no_category_response:
+    type: "object"
+    example: |
+      {
+        "code": 1017,
+        "data": {},
+        "message": ""
+      }
+  no_category_list_response:
+    type: "object"
+    example: |
+      {
+        "code": 1017,
+        "data": [],
+        "message": ""
+      }
+  no_category_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1017
+      }
+  admin_password_error_response:
+    type: "object"
+    example: |
+      {
+        "code": 1018,
+        "data": {},
+        "message": ""
+      }
+  admin_existed_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1019
+      }
+  error_phone_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1020
+      }
+  error_recipient_id_card_code_response:
+    type: "object"
+    example: |
+      {
+        "code": 1021
+      }
+  category_is_using:
+    type: "object"
+    example: |
+      {
+        "code": 1022
+      }
+  exist_config_response:
+    type: "object"
+    example: |
+      {
+        "code": 1024,
+        "data": {},
+        "message": ""
+      }
+  no_tag_response:
+    type: "object"
+    example: |
+      {
+        "code": 1025
+      }
+  no_property_category_response:
+    type: "object"
+    example: |
+      {
+        "code": 1026
+      }
+
+  Address_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "地址ID"
+        type: "number"
+      address:
+        required: false
+        description: "用户所在地址"
+        type: "string"
+      district_id:
+        required: false
+        description: "用户所在区域ID"
+        type: "integer"
+      district_string:
+        required: false
+        description: "用户所在区域"
+        type: "string"
+      city_id:
+        required: false
+        description: "用户所在城市ID"
+        type: "integer"
+      city_string:
+        required: false
+        description: "用户所在城市"
+        type: "string"
+      post_code:
+        required: false
+        description: "邮政编码"
+        type: "string"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      as_default:
+        required: false
+        description: "1代表是默认 | 0表示不默认"
+        type: "boolean"
+      recipient_name:
+        required: true
+        description: "收件人"
+        type: "string"
+      mobile:
+        required: true
+        description: "手机号码"
+        type: "string"
+      province_id:
+        required: false
+        description: "用户所在省ID"
+        type: "number"
+      province_string:
+        required: false
+        description: "用户所在省"
+        type: "string"
+      status:
+        required: false
+        description: "地址状态(未知)"
+        type: "integer"
+      status_string:
+        required: false
+        description: "地址状态(未知)"
+        type: "string"
+      user_id:
+        required: true
+        description: "用户ID"
+        type: "number"
+      recipient_id_card:
+        required: true
+        description: "收件人身份证号"
+        type: "string"
+  Config_Add:
+    type: "object"
+    properties:
+      key:
+        required: true
+        description: "关键字"
+        type: "string"
+      value:
+        required: false
+        description: "值"
+        type: "string"
+      content:
+        required: false
+        description: "内容"
+        type: "string"
+    example: |
+      {
+        "key": "commoditySessionGoods",
+        "value": "<p><img src='https://oyoyo.nos-eastchina1.126.net/image/topic/%E6%97%A5%E7%94%A8%E5%93%81%E4%B8%93%E9%A2%98.jpg'/></p>",
+        "content": "150058,115000,150237,150239,150238,114868,150269,150270,150272,150271,114757"
+      }
+  Config_Response:
+    type: "object"
+    properties:
+      key:
+        required: true
+        description: "关键字"
+        type: "string"
+      value:
+        required: false
+        description: "值"
+        type: "string"
+      content:
+        required: false
+        description: "内容"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+  Config_Update:
+    type: "object"
+    properties:
+      key:
+        required: true
+        description: "关键字"
+        type: "string"
+      value:
+        required: false
+        description: "值"
+        type: "string"
+      content:
+        required: false
+        description: "内容"
+        type: "string"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+    example: |
+      {
+        "key": "commoditySessionGoods",
+        "value": "<p><img src='https://oyoyo.nos-eastchina1.126.net/image/topic/%E6%97%A5%E7%94%A8%E5%93%81%E4%B8%93%E9%A2%98.jpg'/></p>",
+        "content": "150058,115000,150237,150239,150238,114868,150269,150270,150272,150271,114757",
+        "create_time": "2019-4-17 6:6:6",
+        "update_time": "2019-4-17 6:6:6"
+      }
+  Store_Add:
+    type: "object"
+    properties:
+      store_key:
+        required: true
+        description: "store关键字"
+        type: "string"
+      type:
+        required: true
+        description: "store类型"
+        type: "string"
+      business_id:
+        required: false
+        description: "业务id"
+        type: "number"
+      link_url:
+        required: false
+        description: "小程序页面链接地址"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排名"
+        type: "integer"
+      pic_url:
+        required: false
+        description: "图片连接"
+        type: "string"
+      status:
+        required: false
+        description: "0表示显示 | (未显示序号未知)"
+        type: "integer"
+      status_string:
+        required: false
+        description: "显示 | 不显示"
+        type: "string"
+      title:
+        required: false
+        description: "标题"
+        type: "string"
+      content:
+        required: false
+        description: "内容"
+        type: "string"
+      subtype:
+        required: false
+        description: "子类型"
+        type: "string"
+    example: |
+      {
+        "store_key": "infantSession",
+        "type": "goods",
+        "business_id": 114607,
+        "link_url": "/pages/discount-list/index",
+        "rank_order": 0,
+        "pic_url": "https://cdn.it120.cc/apifactory/2019/01/15/c0928f48056f17ca1bdafb2bf151ff08.png",
+        "status": 0,
+        "status_string": "显示",
+        "title": "折扣区",
+        "content": "组合购",
+        "subtype": ""
+      }
+  Store_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "storeID"
+        type: "number"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      business_id:
+        required: false
+        description: "业务id"
+        type: "number"
+      link_url:
+        required: false
+        description: "小程序页面链接地址"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排名"
+        type: "integer"
+      pic_url:
+        required: false
+        description: "图片连接"
+        type: "string"
+      status:
+        required: false
+        description: "0表示显示 | (未显示序号未知)"
+        type: "integer"
+      status_string:
+        required: false
+        description: "显示 | 不显示"
+        type: "string"
+      title:
+        required: false
+        description: "标题"
+        type: "string"
+      content:
+        required: false
+        description: "内容"
+        type: "string"
+      subtype:
+        required: false
+        description: "子类型"
+        type: "string"
+      store_key:
+        required: true
+        description: "store关键字"
+        type: "string"
+      type:
+        required: false
+        description: "类型"
+        type: "string"
+  Store_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "storeID"
+        type: "number"
+      store_key:
+        required: true
+        description: "store关键字"
+        type: "string"
+      type:
+        required: true
+        description: "store类型"
+        type: "string"
+      business_id:
+        required: false
+        description: "业务id"
+        type: "number"
+      link_url:
+        required: false
+        description: "小程序页面链接地址"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排名"
+        type: "integer"
+      pic_url:
+        required: false
+        description: "图片连接"
+        type: "string"
+      status:
+        required: false
+        description: "0表示显示 | (未显示序号未知)"
+        type: "integer"
+      status_string:
+        required: false
+        description: "显示 | 不显示"
+        type: "string"
+      title:
+        required: false
+        description: "标题"
+        type: "string"
+      content:
+        required: false
+        description: "内容"
+        type: "string"
+      subtype:
+        required: false
+        description: "子类型"
+        type: "string"
+    example: |
+      {
+        "id": 101,
+        "store_key": "infantSession",
+        "type": "goods",
+        "business_id": 114607,
+        "link_url": "/pages/discount-list/index",
+        "rank_order": 0,
+        "pic_url": "https://cdn.it120.cc/apifactory/2019/01/15/c0928f48056f17ca1bdafb2bf151ff08.png",
+        "status": 0,
+        "status_string": "显示",
+        "title": "折扣区",
+        "content": "组合购",
+        "subtype": ""
+      }
+  News_Add:
+    type: "object"
+    properties:
+      category_id:
+        required: true
+        description: "分类ID"
+        type: "number"
+      description:
+        required: false
+        description: "新闻描述"
+        type: "string"
+      key_words:
+        required: false
+        description: "相关商品列表的id"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排序编号"
+        type: "integer"
+      pic:
+        required: false
+        description: "标题图片"
+        type: "string"
+      title:
+        required: true
+        description: "新闻标题"
+        type: "string"
+      number_of_views:
+        required: false
+        description: "查看次数"
+        type: "integer"
+      content:
+        required: true
+        description: "新闻内容"
+        type: "string"
+    example: |
+      {
+        "category_id": 12313,
+        "description": "爱上美丽，爱上你自己",
+        "key_words": "114644,114642,114871,115264",
+        "rank_order": 2,
+        "pic": "https://cdn.it120.cc/apifactory/2019/01/20/853c2d6dac12d400aafdeff19dfb83fc.jpg",
+        "title": "有机护肤",
+        "number_of_views": 7135,
+        "content": "https://oyoyo.nos-eastchina1.126.net/image/topic/%E5%BE%B7%E5%9B%BD%E4%B8%96%E5%AE%B62.jpg"
+      }
+  News_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "新闻ID"
+        type: "number"
+      category_id:
+        required: true
+        description: "分类ID"
+        type: "number"
+      description:
+        required: false
+        description: "新闻描述"
+        type: "string"
+      key_words:
+        required: false
+        description: "相关商品列表的id"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排序编号"
+        type: "integer"
+      pic:
+        required: false
+        description: "标题图片"
+        type: "string"
+      title:
+        required: true
+        description: "新闻标题"
+        type: "string"
+      number_of_views:
+        required: false
+        description: "查看次数"
+        type: "integer"
+      content:
+        required: true
+        description: "新闻内容"
+        type: "string"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      status:
+        required: true
+        description: "2表示审核通过(目前已知)"
+        type: "integer"
+      status_string:
+        required: true
+        description: "2表示审核通过(目前已知)"
+        type: "string"
+  News_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "新闻ID"
+        type: "number"
+      category_id:
+        required: false
+        description: "分类ID"
+        type: "number"
+      description:
+        required: false
+        description: "新闻描述"
+        type: "string"
+      key_words:
+        required: false
+        description: "相关商品列表的id"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排序编号"
+        type: "integer"
+      pic:
+        required: false
+        description: "标题图片"
+        type: "string"
+      title:
+        required: false
+        description: "新闻标题"
+        type: "string"
+      number_of_views:
+        required: false
+        description: "查看次数"
+        type: "integer"
+      content:
+        required: false
+        description: "新闻内容"
+        type: "string"
+      status:
+        required: true
+        description: "2表示审核通过(目前已知)"
+        type: "integer"
+      status_string:
+        required: true
+        description: "2表示审核通过(目前已知)"
+        type: "string"
+    example: |
+      {
+          "id": 1231,
+          "category_id": 12313,
+          "description": "爱上美丽，爱上你自己",
+          "key_words": "114644,114642,114871,115264",
+          "rank_order": 2,
+          "pic": "https://cdn.it120.cc/apifactory/2019/01/20/853c2d6dac12d400aafdeff19dfb83fc.jpg",
+          "title": "有机护肤",
+          "number_of_views": 7135,
+          "content": "https://oyoyo.nos-eastchina1.126.net/image/topic/%E5%BE%B7%E5%9B%BD%E4%B8%96%E5%AE%B61.jpg",
+          "status": 2,
+          "status_string": "审核通过"
+      }
+  News_Category_Add:
+    type: "object"
+    properties:
+      as_use:
+        required: true
+        description: "是否启用"
+        type: "boolean"
+      icon:
+        required: true
+        description: "标题图片"
+        type: "string"
+      name:
+        required: true
+        description: "新闻分类名称"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排序编号"
+        type: "integer"
+    example: |
+      {
+          "as_use": true,
+          "icon": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/topic%20icon/%E5%BD%A9%E5%A6%86.png",
+          "name": "彩妆",
+          "rank_order": 1
+      }
+  News_Category_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "新闻分类ID"
+        type: "number"
+      create_time: 
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      as_use:
+        required: true
+        description: "是否启用"
+        type: "boolean"
+      icon:
+        required: true
+        description: "标题图片"
+        type: "string"
+      name:
+        required: true
+        description: "新闻分类名称"
+        type: "string"
+      rank_order:
+        required: true
+        description: "排序编号"
+        type: "integer"
+  News_Category_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "新闻分类ID"
+        type: "number"
+      as_use:
+        required: false
+        description: "是否启用"
+        type: "boolean"
+      icon:
+        required: false
+        description: "标题图片"
+        type: "string"
+      name:
+        required: false
+        description: "新闻分类名称"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排序编号"
+        type: "integer"
+    example: |
+      {
+          "id": 1231,
+          "as_use": true,
+          "icon": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/topic%20icon/%E5%BD%A9%E5%A6%86.png",
+          "name": "彩妆",
+          "rank_order": 1
+      }
+  Notice_Add:
+    type: "object"
+    properties:
+      content:
+        required: false
+        description: "通知内容"
+        type: "string"
+      as_use:
+        required: true
+        description: "是否启用"
+        type: "boolean"
+      title:
+        required: true
+        description: "通知标题"
+        type: "string"
+      type:
+        required: true
+        description: "通知类别"
+        type: "string"
+    example: |
+      {
+          "content": "https://oyoyo.nos-eastchina1.126.net/image/notification/%E7%8E%A9%E6%B3%95.jpg",
+          "as_use": true,
+          "title": "玩法介绍",
+          "type": "show"
+      }
+  Notice_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "通知ID"
+        type: "number"
+      content:
+        required: false
+        description: "通知内容"
+        type: "string"
+      as_use:
+        required: true
+        description: "是否启用"
+        type: "boolean"
+      title:
+        required: true
+        description: "通知标题"
+        type: "string"
+      type:
+        required: true
+        description: "通知类别"
+        type: "string"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      show_list:
+        required: true
+        description: "是否展示"
+        type: "boolean"
+  Notice_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "通知ID"
+        type: "number"
+      content:
+        required: false
+        description: "通知内容"
+        type: "string"
+      as_use:
+        required: false
+        description: "是否启用"
+        type: "boolean"
+      title:
+        required: false
+        description: "通知标题"
+        type: "string"
+      type:
+        required: false
+        description: "通知类别"
+        type: "string"
+    example: |
+      {
+        "id": 1211,
+        "content": "https://oyoyo.nos-eastchina1.126.net/image/notification/%E7%8E%A9%E6%B3%95.jpg",
+        "as_use": true,
+        "title": "玩法介绍",
+        "type": "show"
+      }
+  Order_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "订单ID"
+        type: "number"
+      amount:
+        required: true
+        description: "订单费用"
+        type: "number"
+      amount_logistics:
+        required: true
+        description: "物流费"
+        type: "number"
+      amount_real:
+        required: true
+        description: "订单费用 + 物流费"
+        type: number
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      close_time:
+        required: true
+        description: "订单关闭时间"
+        type: "string"
+      status:
+        required: true
+        description: "-1表示已取消 | 0表示待支付 | 1表示已支付 | 2表示已发货 | 4表示已完成 | 5表示可返现"
+        type: "integer"
+      status_string:
+        required: true
+        description: "-1表示已取消 | 0表示待支付 | 1表示已支付 | 2表示已发货 | 4表示已完成 | 5表示可返现"
+        type: "string"
+      payment_status:
+        required: true
+        description: "0表示未发起付款 | 1表示已发起付款 | 2表示付款已完成"
+        type: "integer"
+      payment_status_string:
+        required: true
+        description: "0表示未发起付款 | 1表示已发起付款 | 2表示付款已完成"
+        type: "string"
+      uid:
+        required: true
+        description: "用户ID"
+        type: "number"
+      referrer_id:
+        required: false
+        description: "关联id"
+        type: "number"
+      block_id:
+        required: true
+        description: "分发积分批次id"
+        type: "number"
+      comment:
+        required: false
+        description: "备注"
+        type: "string"
+  Logistics_Detail_Request:
+    type: "object"
+    properties:
+      time:
+        required: true
+        description: "快递所处的时间点"
+        type: "string"
+      status:
+        required: true
+        description: "快递所处的位置"
+        type: "string"
+  Logistics_Request:
+    type: "object"
+    properties:
+      number:
+        required: true
+        description: "物流单号不能为空串"
+        type: "string"
+      company:
+        required: false
+        description: "物流公司"
+        type: "string"
+      detail_list:
+        required: false
+        description: "物流详情"
+        type: Logistics_Detail_Request[]
+      status:
+        required: false
+        description: "物流状态"
+        type: "integer"
+  User_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "用户ID"
+        type: "number"
+      city:
+        required: false
+        description: "用户所在城市"
+        type: "string"
+      invite_code:
+        required: false
+        description: "会员邀请码"
+        type: "string"
+      referrer_id:
+        required: false
+        description: "关联ID"
+        type: "number"
+      login_token:
+        type: user_token
+      has_bind_referrer:
+        required: false
+        description: "是否绑定关联ID"
+        type: "boolean"
+      membership:
+        required: false
+        description: "是否会员"
+        type: "boolean"
+      member_rank:
+        required: false
+        description: "会员排名"
+        type: "number"
+      rewarded_token:
+        required: false
+        description: "积分"
+        type: "number"
+      reward_money_pending:
+        required: false
+        description: "将获得返利"
+        type: "number"
+      reward_money_balance:
+        required: false
+        description: "余额"
+        type: "number"
+      reward_money_withdraw_pending:
+        required: false
+        description: "将提现金额"
+        type: "number"
+      reward_money_total:
+        required: false
+        description: "返利总金额"
+        type: "number"
+      member_current_block_amount:
+        required: false
+        description: "会员当前批次积分"
+        type: "number"
+      avatar_url:
+        required: false
+        description: "用户头像"
+        type: "string"
+      nick_name:
+        required: false
+        description: "用户昵称"
+        type: "string"
+  User_Detailed_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "用户ID"
+        type: "number"
+      open_id:
+        required: false
+        description: "用户唯一标识"
+        type: "string"
+      nick_name:
+        required: false
+        description: "用户昵称"
+        type: "string"
+      gender:
+        required: false
+        description: "性别"
+        type: "number"
+      language:
+        required: false
+        description: "语言"
+        type: "string"  
+      city:
+        required: false
+        description: "用户所在城市"
+        type: "string"
+      province:
+        required: false
+        description: "用户所在省"
+        type: "string"
+      country:
+        required: false
+        description: "用户所在国家"
+        type: "string"
+      avatar_url:
+        required: false
+        description: "用户头像"
+        type: "string"
+      login_token:
+        required: false
+        description: "用户登录token"
+        type: "string"
+      membership:
+        required: false
+        description: "是否会员"
+        type: "boolean"
+      member_rank:
+        required: false
+        description: "会员排名"
+        type: "number"
+      has_bind_referrer:
+        required: false
+        description: "是否绑定关联ID"
+        type: "boolean"
+      member_current_block_amount:
+        required: false
+        description: "会员当前批次积分"
+        type: "number"
+      rewarded_token:
+        required: false
+        description: "积分"
+        type: "number"
+      reward_money_pending:
+        required: false
+        description: "将获得返利"
+        type: "number"
+      reward_money_balance:
+        required: false
+        description: "余额"
+        type: "number"
+      reward_money_withdraw_pending:
+        required: false
+        description: "将提现金额"
+        type: "number"
+      reward_money_total:
+        required: false
+        description: "返利总金额"
+        type: "number"
+      referrer_id:
+        required: false
+        description: "关联ID"
+        type: "number"
+      is_vip:
+        required: false
+        description: "是否为vip"
+        type: "boolean"
+  News_User_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "新闻ID"
+        type: "number"
+      category_id:
+        required: true
+        description: "分类ID"
+        type: "number"
+      description:
+        required: false
+        description: "新闻描述"
+        type: "string"
+      key_words:
+        required: false
+        description: "相关商品列表的id"
+        type: "string"
+      rank_order:
+        required: false
+        description: "排序编号"
+        type: "integer"
+      pic:
+        required: false
+        description: "标题图片"
+        type: "string"
+      title:
+        required: true
+        description: "新闻标题"
+        type: "string"
+      number_of_views:
+        required: false
+        description: "查看次数"
+        type: "integer"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      status:
+        required: true
+        description: "2表示审核通过(目前已知)"
+        type: "integer"
+      status_string:
+        required: true
+        description: "2表示审核通过(目前已知)"
+        type: "string"
+  Order_Add_Response:
+    type: "object"
+    properties:
+      id:
+        required: false
+        description: "订单ID"
+        type: "number"
+      amount:
+        required: true
+        description: "订单金额"
+        type: "number"
+      logistics_amount:
+        required: true
+        description: "物流费用"
+        type: "number"
+      real_amount:
+        required: true
+        description: "amount + logistics_amount"
+        type: "number"
+  Order_Add:
+    type: "object"
+    properties:
+      login_token:
+        required: true
+        description: "用户登录token"
+        type: "string"
+      goods_json_str:
+        required: true
+        description: "包含商品ID, 商品数量以及商品款式ID"
+        type: "string"
+      address:
+        required: true
+        description: "订单地址"
+        type: "string"
+      mobile:
+        required: true
+        description: "手机号码"
+        type: "string"
+      recipient_id_card:
+        required: true
+        description: "收件人身份证号"
+        type: "string"
+      recipient_name:
+        required: true
+        description: "收件人名称"
+        type: "string"
+      post_code:
+        required: true
+        description: "邮件地址"
+        type: "string"
+      province_string:
+        required: true
+        description: "收件人所在省份"
+        type: "string"
+      city_string:
+        required: true
+        description: "收件人所在城市"
+        type: "string"
+      comment:
+        required: true
+        description: "备注"
+        type: "string"
+    example: |
+      {
+        "login_token": "61ffdc90-352b-4137-85a4-db87e92724b0",
+        "goods_json_str": "[{'goods_id':114578, 'number':2, 'property_child_ids':'10450:41200'}]",
+        "address": "保亿中心2601",
+        "mobile": "17851231230",
+        "recipient_id_card": "330330330330330330",
+        "recipient_name": "test",
+        "post_code": "325111",
+        "province_string": "浙江省",
+        "city_string": "杭州市",
+        "comment": "尽快发货"
+      }
+  Pre_Pay_DTO_Response:
+    type: "object"
+    properties:
+      appId:
+        required: true
+        description: "小程序ID"
+        type: "string"
+      timeStamp:
+        required: true
+        description: "时间戳"
+        type: "string"
+      nonceStr:
+        required: true
+        description: "随机字符串"
+        type: "string"
+      package:
+        required: true
+        description: ""
+        type: "string"
+      signType:
+        required: true
+        description: "签名类型"
+        type: "string"
+      paySign:
+        required: true
+        description: "签名"
+        type: "string"
+  Order_Goods_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "OrderGoodsID"
+        type: "number"
+      amount:
+        required: true
+        description: "订单金额"
+        type: "number"
+      amount_reward:
+        required: false
+        description: "订单返利"
+        type: "number"
+      order_id:
+        required: true
+        description: "订单ID"
+        type: "number"
+      property_string:
+        required: false
+        description: "款式分类名称:款式名称(benecos口红:豆沙色)"
+        type: "string"
+      property:
+        required: true
+        description: "款式分类ID:款式ID(10450:41200)"
+        type: "string"
+      uid:
+        required: true
+        description: "用户ID"
+        type: "number"
+      referrer_id:
+        required: false
+        description: "关联用户ID"
+        type: "number"
+      pic:
+        required: false
+        description: "图片地址"
+        type: "string"
+      number:
+        required: true
+        description: "商品数量"
+        type: "number"
+      goods_name:
+        required: true
+        description: "商品名称"
+        type: "string"
+  Order_User_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "订单ID"
+        type: "number"
+      amount:
+        required: true
+        description: "订单费用"
+        type: "number"
+      amount_logistics:
+        required: true
+        description: "物流费"
+        type: "number"
+      amount_real:
+        required: true
+        description: "订单费用 + 物流费"
+        type: number
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      close_time:
+        required: true
+        description: "订单关闭时间"
+        type: "string"
+      status:
+        required: true
+        description: "-1表示已取消 | 0表示待支付 | 1表示已支付 | 2表示已发货 | 4表示已完成 | 5表示可返现"
+        type: "integer"
+      status_string:
+        required: true
+        description: "-1表示已取消 | 0表示待支付 | 1表示已支付 | 2表示已发货 | 4表示已完成 | 5表示可返现"
+        type: "string"
+      payment_status:
+        required: true
+        description: "0表示未发起付款 | 1表示已发起付款 | 2表示付款已完成"
+        type: "integer"
+      payment_status_string:
+        required: true
+        description: "0表示未发起付款 | 1表示已发起付款 | 2表示付款已完成"
+        type: "string"
+      uid:
+        required: true
+        description: "用户ID"
+        type: "number"
+      referrer_id:
+        required: false
+        description: "关联id"
+        type: "number"
+      block_id:
+        required: true
+        description: "分发积分批次id"
+        type: "number"
+      order_goods:
+        required: true
+        description: "订单商品关联集合"
+        type: Order_Goods_Response[]
+      address:
+        required: true
+        description: "订单地址"
+        type: "string"
+      province_string:
+        required: true
+        description: "收件人所在省份"
+        type: "string"
+      city_string:
+        required: true
+        description: "收件人所在城市"
+        type: string
+      district_string:
+        required: false
+        description: "收件人所在区域"
+        type: "string"
+      post_code:
+        required: true
+        description: "邮政编码"
+        type: "string"
+      recipient_name:
+        required: true
+        description: "收件人姓名"
+        type: "string"
+      recipient_id_card:
+        required: true
+        description: "收件人身份证号"
+        type: "string"
+      mobile:
+        required: true
+        description: "收件人手机号码"
+        type: "string"
+      comment:
+        required: false
+        description: "备注"
+        type: "string"
+      logistics_status:
+        required: false
+        description: "物流状态"
+        type: "integer"
+      logistics:
+        required: false
+        description: "物流信息集合"
+        type: Logistics_Request[]
+  Order_Statistics_Response:
+    type: "object"
+    properties:
+      pending_payment:
+        required: true
+        description: "待支付订单个数"
+        type: "number"
+      finished_payment:
+        required: true
+        description: "已支付订单个数"
+        type: "number"
+      pending_delivery:
+        required: true
+        description: "已发货订单个数"
+        type: "number"
+      finished:
+        required: true
+        description: "已完成订单个数"
+        type: "number"
+  Reward_Money_Withdraw_Request_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "提现ID"
+        type: "number"
+      member_id:
+        required: true
+        description: "会员ID"
+        type: "number"
+      amount:
+        required: true
+        description: "提现金额"
+        type: "number"
+      status:
+        required: true
+        description: "2表示withdraw_pending | 3表示withdraw_complete"
+        type: "integer"
+      status_string:
+        required: true
+        description: "2表示withdraw_pending | 3表示withdraw_complete"
+        type: "string"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+  Address_Add:
+    type: "object"
+    properties:
+      login_token:
+        required: true
+        description: "用户登录token"
+        type: "string"
+      address:
+        required: true
+        description: "用户地址"
+        type: "string"
+      city_id:
+        required: true
+        description: "用户所在城市ID"
+        type: "number"
+      city_string:
+        required: true
+        description: "用户所在城市"
+        type: "string"
+      post_code:
+        required: true
+        description: "邮政编码"
+        type: "string"
+      mobile:
+        required: true
+        description: "手机号码"
+        type: "string"
+      province_id:
+        required: true
+        description: "用户所在省份ID"
+        type: "number"
+      province_string:
+        required: true
+        description: "用户所在省份"
+        type: "string"
+      recipient_name:
+        required: true
+        description: "收件人名称"
+        type: "string"
+      recipient_id_card:
+        required: true
+        description: "收件人身份证号"
+        type: "string"
+      district_id:
+        required: false
+        description: "收件人所在区域ID"
+        type: "number"
+      district_string:
+        required: false
+        description: "收件人所在区域"
+        type: "string"
+      as_defalut:
+        required: false
+        description: "是否默认地址"
+        type: "boolean"
+      user_id:
+        required: false
+        description: "用户ID"
+        type: "number"
+    example: |
+      {
+        "login_token": "61ffdc90-352b-4137-85a4-db87e92724b0",
+        "address": "保亿中心2601",
+        "city_id": 1,
+        "city_string": "杭州市",
+        "post_code": "325000",
+        "mobile": "17858441234",
+        "province_id": 1,
+        "province_string": "浙江省",
+        "recipient_name": "test",
+        "recipient_id_card": "500239199005080018",
+        "district_id": 1,
+        "district_string": "萧山区",
+        "as_defalut": true,
+        "user_id": 1231
+      }
+  Address_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "地址ID"
+        type: "number"
+      login_token:
+        required: true
+        description: "用户登录token"
+        type: "string"
+      address:
+        required: false
+        description: "用户地址"
+        type: "string"
+      city_id:
+        required: false
+        description: "用户所在城市ID"
+        type: "number"
+      city_string:
+        required: false
+        description: "用户所在城市"
+        type: "string"
+      post_code:
+        required: false
+        description: "邮政编码"
+        type: "string"
+      mobile:
+        required: false
+        description: "手机号码"
+        type: "string"
+      province_id:
+        required: false
+        description: "用户所在省份ID"
+        type: "number"
+      province_string:
+        required: false
+        description: "用户所在省份"
+        type: "string"
+      recipient_name:
+        required: false
+        description: "收件人名称"
+        type: "string"
+      recipient_id_card:
+        required: false
+        description: "收件人身份证号"
+        type: "string"
+      district_id:
+        required: false
+        description: "收件人所在区域ID"
+        type: "number"
+      district_string:
+        required: false
+        description: "收件人所在区域"
+        type: "string"
+      as_defalut:
+        required: false
+        description: "是否默认地址"
+        type: "boolean"
+    example: |
+      {
+        "id": 123123,
+        "login_token": "61ffdc90-352b-4137-85a4-db87e92724b0",
+        "address": "保亿中心2601",
+        "city_id": 1,
+        "city_string": "杭州市",
+        "post_code": "325000",
+        "mobile": "17858441234",
+        "province_id": 1,
+        "province_string": "浙江省",
+        "recipient_name": "test",
+        "recipient_id_card": "500239199005080018",
+        "district_id": 1,
+        "district_string": "萧山区",
+        "as_defalut": true
+      }
+  Picture_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "图片ID"
+        type: "number"
+      goods_id:
+        required: true
+        description: "商品ID"
+        type: "number"
+      pic:
+        required: true
+        description: "图片链接"
+        type: "string"
+  Sku_Price_Response:
+    type: "object"
+    properties:
+      "id":
+        required: true
+        description: "SkuID"
+        type: "number"
+      "goods_id":
+        required: true
+        description: "商品ID"
+        type: "number"
+      "property":
+        required: true
+        description: "10450:41200(款式分类ID:款式ID)"
+        type: "string"
+      "property_string":
+        required: true
+        description: "benecos口红:豆沙色(款式分类名称:款式名称)"
+        type: "string"
+      "original_price":
+        required: true
+        description: "原价"
+        type: "number"
+      "no_sale_price":
+        required: true
+        description: "销售价"
+        type: "number"
+      "sale_price":
+        required: true
+        description: "TODO:未知"
+        type: "number"
+      "maximum_reward":
+        required: true
+        description: "最大返利"
+        type: "number"
+      "minimum_reward":
+        required: true
+        description: "最小返利"
+        type: "number"
+      "vip_price":
+        required: true
+        description: "分销商价"
+        type: "number"
+  Goods_Add:
+    type: "object"
+    properties:
+      category:
+        required: true
+        description: "类别id"
+        type: "number"
+      name:
+        required: true
+        description: "商品名称"
+        type: "string"
+      pics:
+        required: false
+        description: "图片集合, 并且size大于0"
+        type: Picture_Response[]
+      sku_list:
+        required: false
+        description: "SkuPrice集合, 并且size大于0"
+        type: Sku_Price_Response[]
+      original_price:
+        required: false
+        description: "原价"
+        type: "number"
+      no_sale_price:
+        required: false
+        description: "销售价"
+        type: "number"
+      sale_price:
+        required: false
+        description: "未知"
+        type: "number"
+      maximum_reward:
+        required: false
+        description: "最大返利"
+        type: "number"
+      minimum_reward:
+        required: false
+        description: "最小返利"
+        type: "number"
+      property_category:
+        required: false
+        description: "款式分类ID"
+        type: "string"
+      properties:
+        required: false
+        description: "款式IDs"
+        type: "string"
+      characteristic:
+        required: false
+        description: "商品特性"
+        type: "string"
+      available_time:
+        required: false
+        description: "到期时间"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序"
+        type: "integer"
+      recommend_status:
+        required: false
+        description: "0表示普通 | 1表示推荐"
+        type: "integer"
+      recommend_status_string:
+        required: false
+        description: "0表示普通 | 1表示推荐"
+        type: "string"
+      status:
+        required: false
+        description: "0表示上架 | 1表示下架"
+        type: "integer"
+      status_string:
+        required: false
+        description: "0表示上架 | 1表示下架"
+        type: "string"
+      stores:
+        required: false
+        description: "余量"
+        type: "number"
+      weight:
+        required: false
+        description: "重量"
+        type: "number"
+      description:
+        required: false
+        description: "商品描述"
+        type: "string"
+      related_goods_ids:
+        required: false
+        description: "套餐中的商品IDs或者单品ID"
+        type: "string"
+      tag_ids:
+        required: false
+        description: "标签IDs"
+        type: "string"
+      vip_price:
+        required: false
+        description: "分销商价"
+        type: "number"
+      as_bundle:
+        required: false
+        description: "是否绑定"
+        type: "boolean"
+    example: |
+      {
+        "category": 101011,
+        "name": "德国Doppelherz双心 蓝莓叶黄素营养护眼胶囊 30粒/盒 缓解眼疲劳",
+        "pics": [
+          {
+            "id": 12123,
+            "goods_id": 123145,
+            "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg"
+          }
+        ],
+        "sku_list": [
+          {
+            "id": 12312,
+            "goods_id": 123123,
+            "property": "10450:41200",
+            "property_string": "benecos口红:豆沙色",
+            "original_price": 200,
+            "no_sale_price": 200,
+            "sale_price": 190,
+            "maximum_reward": 20,
+            "minimum_reward": 10,
+            "vip_price": 160
+          }
+        ],
+        "original_price": 6800,
+        "no_sale_price": 6800,
+        "sale_price": 6800,
+        "maximum_reward": 860,
+        "minimum_reward": 258,
+        "property_category": "11203",
+        "properties": "43210,43211,43212,43213,43214,43215,43216,43217,43218,43219",
+        "characteristic": "纯黑植物天然无刺激遮白发",
+        "available_time": "2014-5-5 10:10:20",
+        "order_rank": 11,
+        "recommend_status": 0,
+        "recommend_status_string": "推荐",
+        "status": 0,
+        "status_string": "上架",
+        "stores": 500,
+        "weight": 0,
+        "description": "<p><img src='https://oyoyo.nos-eastchina1.126.net/image/product/Sanotint%E5%9C%A3%E4%B8%9D%E5%A9%B7%E6%9F%93%E5%8F%91%E5%89%82.jpg' title='apifactory/Sanotint圣丝婷染发剂.jpg' alt='Sanotint圣丝婷染发剂.jpg'/></p>",
+        "related_goods_ids": "115026,115027",
+        "tag_ids": "1212,12121",
+        "vip_price": 4000,
+        "as_bundle": true
+      }
+  Goods_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "商品ID"
+        type: "number"
+      pics:
+        required: false
+        description: "图片集合, 并且size大于0"
+        type: Picture_Response[]
+      sku_list:
+        required: false
+        description: "SkuPrice集合, 并且size大于0"
+        type: Sku_Price_Response[]
+      vip_price:
+        required: false
+        description: "分销商价"
+        type: "number"
+      as_bundle:
+        required: false
+        description: "是否绑定"
+        type: "boolean"
+      stores:
+        required: false
+        description: "余量"
+        type: "number"
+      weight:
+        required: false
+        description: "重量"
+        type: "number"
+      original_price:
+        required: false
+        description: "原价"
+        type: "number"
+      no_sale_price:
+        required: false
+        description: "销售价"
+        type: "number"
+      status:
+        required: false
+        description: "0表示上架 | 1表示下架"
+        type: "integer"
+      status_string:
+        required: false
+        description: "0表示上架 | 1表示下架"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序"
+        type: "integer"
+      name:
+        required: false
+        description: "商品名称"
+        type: "string"
+      category:
+        required: true
+        description: "类别id"
+        type: "number"
+      characteristic:
+        required: false
+        description: "商品特性"
+        type: "string"
+      available_time:
+        required: false
+        description: "到期时间"
+        type: "string"
+      description:
+        required: false
+        description: "商品描述"
+        type: "string"
+      maximum_reward:
+        required: false
+        description: "最大返利"
+        type: "number"
+      minimum_reward:
+        required: false
+        description: "最小返利"
+        type: "number"
+      property_category:
+        required: false
+        description: "款式分类ID"
+        type: "string"
+      properties:
+        required: false
+        description: "款式IDs"
+        type: "string"
+      recommend_status:
+        required: false
+        description: "0表示普通 | 1表示推荐"
+        type: "integer"
+      recommend_status_string:
+        required: false
+        description: "0表示普通 | 1表示推荐"
+        type: "string"
+      related_goods_ids:
+        required: false
+        description: "套餐中的商品IDs或者单品ID"
+        type: "string"
+      sale_price:
+        required: false
+        description: "未知"
+        type: "number"
+      tag_ids:
+        required: false
+        description: "标签IDs"
+        type: "string"
+    example: |
+      {
+        "id": 10111,
+        "pics": [
+          {
+            "id": 12123,
+            "goods_id": 123145,
+            "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg"
+          }
+        ],
+        "sku_list": [
+          {
+            "id": 12312,
+            "goods_id": 123123,
+            "property": "10450:41200",
+            "property_string": "benecos口红:豆沙色",
+            "original_price": 200,
+            "no_sale_price": 200,
+            "sale_price": 190,
+            "maximum_reward": 20,
+            "minimum_reward": 10,
+            "vip_price": 160
+          }
+        ],
+        "vip_price": 4000,
+        "as_bundle": true,
+        "stores": 500,
+        "weight": 0,
+        "original_price": 6800,
+        "no_sale_price": 6800,
+        "status": 0,
+        "status_string": "上架",
+        "order_rank": 11,
+        "name": "德国Doppelherz双心 蓝莓叶黄素营养护眼胶囊 30粒/盒 缓解眼疲劳",
+        "category": 101011,
+        "characteristic": "纯黑植物天然无刺激遮白发",
+        "available_time": "2014-5-5 10:10:20",
+        "description": "<p><img src='https://oyoyo.nos-eastchina1.126.net/image/product/Sanotint%E5%9C%A3%E4%B8%9D%E5%A9%B7%E6%9F%93%E5%8F%91%E5%89%82.jpg' title='apifactory/Sanotint圣丝婷染发剂.jpg' alt='Sanotint圣丝婷染发剂.jpg'/></p>",
+        "maximum_reward": 860,
+        "minimum_reward": 258,
+        "property_category": "11203",
+        "properties": "43210,43211,43212,43213,43214,43215,43216,43217,43218,43219",
+        "recommend_status": 0,
+        "recommend_status_string": "推荐",
+        "related_goods_ids": "115026,115027",
+        "sale_price": 6800,
+        "tag_ids": "1212,12121"
+      }
+  Goods_Basic_Info_DTO_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "商品ID"
+        type: "number"
+      number_of_sold:
+        required: true
+        description: "销量"
+        type: "number"
+      number_of_favorite:
+        required: true
+        description: "收藏量"
+        type: "number"
+      number_of_good_comments:
+        required: true
+        description: "好评量"
+        type: "number"
+      number_of_ordered:
+        required: true
+        description: "下单量"
+        type: "number"
+      pic:
+        required: true
+        description: "标题图片"
+        type: "string"
+      vip_price:
+        required: false
+        description: "分销商价"
+        type: "number"
+      as_bundle:
+        required: false
+        description: "是否绑定"
+        type: "boolean"
+      stores:
+        required: false
+        description: "余量"
+        type: "number"
+      weight:
+        required: false
+        description: "重量"
+        type: "number"
+      original_price:
+        required: false
+        description: "原价"
+        type: "number"
+      no_sale_price:
+        required: false
+        description: "销售价"
+        type: "number"
+      status:
+        required: false
+        description: "0表示上架 | 1表示下架"
+        type: "integer"
+      status_string:
+        required: false
+        description: "0表示上架 | 1表示下架"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序"
+        type: "integer"
+      name:
+        required: false
+        description: "商品名称"
+        type: "string"
+      category:
+        required: true
+        description: "类别id"
+        type: "number"
+      characteristic:
+        required: false
+        description: "商品特性"
+        type: "string"
+      available_time:
+        required: false
+        description: "到期时间"
+        type: "string"
+      description:
+        required: false
+        description: "商品描述"
+        type: "string"
+      maximum_reward:
+        required: false
+        description: "最大返利"
+        type: "number"
+      minimum_reward:
+        required: false
+        description: "最小返利"
+        type: "number"
+      property_category:
+        required: false
+        description: "款式分类ID"
+        type: "string"
+      properties:
+        required: false
+        description: "款式IDs"
+        type: "string"
+      recommend_status:
+        required: false
+        description: "0表示普通, 1表示推荐"
+        type: "integer"
+      recommend_status_string:
+        required: false
+        description: "0表示普通, 1表示推荐"
+        type: "string"
+      related_goods_ids:
+        required: false
+        description: "套餐中的商品IDs或者单品ID"
+        type: "string"
+      sale_price:
+        required: false
+        description: "未知"
+        type: "number"
+      tags:
+        required: false
+        description: "标签集合"
+        type: Tag_Response[]
+      key:
+        required: true
+        description: "编号, 同一个一级类别下的类别标号相同"
+        type: "string"
+  Tag_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "标签ID"
+        type: "number"
+      title:
+        required: true
+        description: "标签标题"
+        type: "string"
+  Category_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "类别ID"
+        type: "integer"
+      name:
+        required: true
+        description: "类别名"
+        type: string
+      key:
+        required: true
+        description: "编号，同一个一级类别下的类别标号相同"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序编号"
+        type: "integer"
+      type:
+        required: false
+        description: "意义不明, 暂时留空"
+        type: "string"
+      is_use:
+        required: false
+        description: "是否启用"
+        type: "boolean"
+      icon:
+        required: false
+        description: "图标, 除一级分类外, 该项不能为null"
+        type: "string"
+      pid:
+        required: false
+        description: "父分类ID, 除了一级分类外, 该项不能为null"
+        type: "number"
+      level:
+        required: true
+        description: "分类级别：1表示一级分类，2表示二级分类"
+        type: "integer"
+      max_depth:
+        required: false
+        description: "深度"
+        type: "integer"
+      goods_numbers:
+        required: true
+        description: "商品品牌数"
+        type: "number"
+      banner:
+        required: true
+        description: "类别横幅图片"
+        type: "string"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      show_list:
+        required: true
+        description: "是否展示商品"
+        type: "boolean"
+  Property_Category_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "款式分类ID"
+        type: "number"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+      name:
+        required: true
+        description: "款式分类名称"
+        type: "string"
+      order_rank:
+        required: true
+        description: "排序编号"
+        type: "integer"
+  Goods_Detail_DTO_Response:
+    type: "object"
+    properties:
+      basic_info:
+        type: Goods_Basic_Info_DTO_Response
+      category:
+        type: Category_Response
+      pics:
+        type: Picture_Response[] 
+      property_category:
+        type: Property_Category_Response
+  Goods_Detail_DTO_User_Response:
+    type: "object"
+    properties:
+      basic_info:
+        type: Goods_Basic_Info_DTO_Response
+      category:
+        type: Category_Response
+      pics:
+        type: Picture_Response[]
+      property_category:
+        type: Property_Category_Response
+      description:
+        required: false
+        description: "商品描述信息"
+        type: "string"
+      current_reward:
+        required: true
+        description: "当前返利"
+        type: "number"
+      top_reward:
+        required: true
+        description: "最高返利"
+        type: "number"
+      lowest_reward:
+        required: true
+        description: "最低返利"
+        type: "number"
+  Category_Add:
+    type: "object"
+    properties:
+      name:
+        required: true
+        description: "类别名"
+        type: "string"
+      key:
+        required: true
+        description: "编号，同一个一级类别下的类别标号相同"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序编号"
+        type: "integer"
+      type:
+        required: false
+        description: "意义不明, 暂时留空"
+        type: "string"
+      is_use:
+        required: false
+        description: "是否启用"
+        type: "boolean"
+      icon:
+        required: false
+        description: "图标, 除一级分类外, 该项不能为null"
+        type: "string"
+      pid:
+        required: false
+        description: "父分类ID, 除了一级分类外, 该项不能为null"
+        type: "number"
+      level:
+        required: true
+        description: "分类级别：1表示一级分类，2表示二级分类"
+        type: "integer"
+      max_depth:
+        required: false
+        description: "深度"
+        type: "integer"
+      goods_numbers:
+        required: true
+        description: "品牌下的商品种类"
+        type: "number"
+      banner:
+        required: true
+        description: "类别横幅图片"
+        type: "string"
+    example: |
+      {
+        "name": "爱他美",
+        "key": "1",
+        "order_rank": 1,
+        "type": "",
+        "is_use": true,
+        "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+        "pid": 35102,
+        "level": 2,
+        "max_depth": 2,
+        "goods_numbers": 9,
+        "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg"
+      }
+  Category_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "类别ID"
+        type: "integer"
+      name:
+        required: false
+        description: "类别名"
+        type: string
+      key:
+        required: false
+        description: "编号，同一个一级类别下的类别标号相同"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序编号"
+        type: "integer"
+      type:
+        required: false
+        description: "意义不明, 暂时留空"
+        type: "string"
+      is_use:
+        required: false
+        description: "是否启用"
+        type: "boolean"
+      icon:
+        required: false
+        description: "图标, 除一级分类外, 该项不能为null"
+        type: "string"
+      pid:
+        required: false
+        description: "父分类ID, 除了一级分类外, 该项不能为null"
+        type: "number"
+      level:
+        required: true
+        description: "分类级别：1表示一级分类，2表示二级分类"
+        type: "integer"
+      max_depth:
+        required: false
+        description: "深度"
+        type: "integer"
+      goods_numbers:
+        required: false
+        description: "商品品牌数"
+        type: "number"
+      banner:
+        required: false
+        description: "类别横幅图片"
+        type: "string"
+    example: |
+      {
+        "id": 1231,
+        "name": "爱他美",
+        "key": "1",
+        "order_rank": 1,
+        "type": "",
+        "is_use": true,
+        "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+        "pid": 35102,
+        "level": 2,
+        "max_depth": 2,
+        "goods_numbers": 9,
+        "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg"
+      }
+  Property_Category_Add:
+    type: "object"
+    properties:
+      name:
+        required: true
+        description: "款式分类名称"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序编号"
+        type: "integer"
+    example: |
+      {
+        "name": "雪本诗面膜",
+        "order_rank": 1
+      }
+  Property_Category_Update:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "款式分类ID"
+        type: "number"
+      name:
+        required: false
+        description: "款式分类名称"
+        type: "string"
+      order_rank:
+        required: false
+        description: "排序编号"
+        type: "integer"
+    example: |
+      {
+        "id": 11212,
+        "name": "雪本诗面膜",
+        "order_rank": 1
+      }
+  Sku_Price_User_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "SkuPriceID"
+        type: "number"
+      original_price:
+        required: true
+        description: "原价"
+        type: "number"
+      real_price:
+        required: true
+        description: "真实价格"
+        type: "number"
+      current_reward:
+        required: true
+        description: "当前返利"
+        type: "number"
+  User_Add:
+    type: "object"
+    properties:
+      encrypted_data:
+        required: true
+        description: "加密数据"
+        type: "string"
+      iv:
+        required: true
+        description: "偏移量"
+        type: "string"
+      code:
+        required: false
+        description: "微信登录凭证"
+        type: "string"
+    example: |
+      {
+        "encrypted_data": "5FF7B58E548D31E34E35A6F2DBB927F4381f04bf356206d6",
+        "iv": "1",
+        "code": "581f04bf356206d6"
+      }
+  User_Login:
+    type: "object"
+    properties:
+      login_token:
+        required: false
+        description: "用户登录token"
+        type: "string"
+    example: |
+      {
+        "login_token": "5FF7B58E548D31E34E35A6F2DBB927F4381f04bf356206d6"
+      }
+  User_Bind_Referrer:
+    type: "object"
+    properties:
+      login_token:
+        required: true
+        description: "用户登录token"
+        type: "string"
+      referrer_id:
+        required: true
+        description: "关联会员id"
+        type: "number"
+    example: |
+      {
+        "login_token": "5FF7B58E548D31E34E35A6F2DBB927F4381f04bf356206d6",
+        "referrer_id": 1
+      }
+  User_Register_Member:
+    type: "object"
+    properties:
+      login_token:
+        required: true
+        description: "用户登录token"
+        type: "string"
+      invite_code:
+        required: true
+        description: "邀请码"
+        type: "string"
+    example: |
+      {
+        "login_token": "5FF7B58E548D31E34E35A6F2DBB927F4381f04bf356206d6",
+        "invite_code": "WD423"
+      }
+  User_Info_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "用户ID"
+        type: "number"
+      login_token:
+        required: false
+        description: "用户登录token"
+        type: "string"
+      membership:
+        required: false
+        description: "是否会员"
+        type: "boolean"
+      member_rank:
+        required: false
+        description: "会员排名"
+        type: "number"
+      has_bind_referrer:
+        required: false
+        description: "是否绑定关联ID"
+        type: "boolean"
+      member_current_block_amount:
+        required: false
+        description: "会员当前批次积分"
+        type: "number"
+      rewarded_token:
+        required: false
+        description: "积分"
+        type: "number"
+      reward_money_pending:
+        required: false
+        description: "将获得返利"
+        type: "number"
+      reward_money_balance:
+        required: false
+        description: "余额"
+        type: "number"
+      reward_money_withdraw_pending:
+        required: false
+        description: "将提现金额"
+        type: "number"
+      reward_money_total:
+        required: false
+        description: "返利总金额"
+        type: "number"
+      referrer_id:
+        required: false
+        description: "关联ID"
+        type: "number"
+      member_potential_rank:
+        required: false
+        description: "下个批次的积分排名"
+        type: "number"
+      member_current_block_rank:
+        required: false
+        description: "会员当前积分排名"
+        type: "number"
+      reward_current_ratio:
+        required: false
+        description: "当前平均返现率"
+        type: "number"
+  Member_Mining_Action_Log_Response:
+    type: "object"
+    properties: 
+      id:
+        required: true
+        description: "ID"
+        type: "number"
+      block_id:
+        required: true
+        description: "积分批次ID"
+        type: "number"
+      member_id:
+        required: true
+        description: "会员ID"
+        type: "number"
+      contribution_amount:
+        required: true
+        description: "发展二级会员人数"
+        type: "number"
+      granted_tokens:
+        required: true
+        description: "可获得的积分"
+        type: "number"
+      current_block_rank:
+        required: true
+        description: "当前批次积分"
+        type: "number"
+      current_block_ratio:
+        required: true
+        description: "当前批次返现率"
+        type: "number"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      type:
+        required: true
+        description: "0表示销售贡献值类型|1表示发展二级会员类型"
+        type: "integer"
+  Member_Reward_Action_Log_Response:
+    type: "object"
+    properties: 
+      id:
+        required: true
+        description: "返利记录ID"
+        type: "number"
+      member_id:
+        required: true
+        description: "会员ID"
+        type: "number"
+      referee_id:
+        required: true
+        description: "关联ID"
+        type: "number"
+      goods_id:
+        required: true
+        description: "商品ID"
+        type: "number"
+      goods_number:
+        required: true
+        description: "商品数量"
+        type: "number"
+      property:
+        required: true
+        description: "款式分类ID:款式ID"
+        type: "string"
+      order_id:
+        required: true
+        description: "订单ID"
+        type: "number"
+      action_type:
+        required: true
+        description: "0表示返利中 | 1表示确认返利 | 2表示提现中 | 3表示确认提现"
+        type: "integer"
+      action_type_string:
+        required: true
+        description: "0表示返利中 | 1表示确认返利 | 2表示提现中 | 3表示确认提现"
+        type: "string"
+      amount:
+        required: true
+        description: "金额"
+        type: "number"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+  Favorite_goods_Response:
+    type: "object"
+    properties: 
+      user_id:
+        required: true
+        description: "用户ID"
+        type: "number"
+      goods_id:
+        required: true
+        description: "商品ID"
+        type: "number"
+      create_time:
+        required: true
+        description: "创建时间"
+        type: "string"
+      update_time:
+        required: true
+        description: "修改时间"
+        type: "string"
+  User_Rank_Response:
+    type: "object"
+    properties: 
+      avatar_url:
+       required: true
+       description: "用户头像地址"
+       type: "string"
+      rewarded_token:
+        required: true
+        description: "用户积分"
+        type: "number"
+      nick_name:
+        required: true
+        description: "用户昵称"
+        type: "string"
+  Invite_Code_Response:
+    type: "object"
+    properties: 
+      invite_code:
+        required: true
+        description: "邀请码"
+        type: "string"
+      member_id:
+        required: false
+        description: "会员ID"
+        type: "number"
+      used:
+        required: false
+        description: "是否使用"
+        type: "boolean"
+      used_date:
+        required: false
+        description: "使用时间"
+        type: "string"
+      belongs_to:
+        required: false
+        description: "邀请码所属会员ID"
+        type: "number"
+  Admin_Response:
+    type: "object"
+    properties:
+      id:
+        required: true
+        description: "管理员ID"
+        type: "number"
+      username:
+        required: true
+        description: "管理员用户名称"
+        type: "string"
+      login_token:
+        required: true
+        description: "管理员登录token"
+        type: "string"
+
+/admin:
+  description: "/admin下的api, 需要在管理员登录的情况下调用"
+  /address:
+    /list:
+      get:
+        description: "查询所有地址"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        responses:
+          200:
+            description: "0表示查询所有地址成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                      required: true
+                      description: "响应码"
+                      type: "integer"
+                  data:
+                      type: Address_Response[]
+                  message:
+                      required: true
+                      description: ""
+                      type: "string"  
+                example: |
+                  {
+                    "code": 0,
+                    "data": 
+                      [
+                        {
+                          "id": 132123,
+                          "address": "保亿中心B座2601",
+                          "district_id": 1,
+                          "district_string": "萧山区",
+                          "city_id": 11,
+                          "city_string": "杭州市",
+                          "post_code": "325001",
+                          "create_time": "2019-4-17 6:6:6",
+                          "update_time": "2019-4-17 6:6:6",
+                          "as_default": true,
+                          "recipient_name": "test",
+                          "mobile": "18668480196",
+                          "province_id": 111,
+                          "province_string": "浙江省",
+                          "status": 0,
+                          "status_string": "未知",
+                          "user_id": 12341,
+                          "recipient_id_card": "500239199005080018"
+                        }
+                      ],
+                    "message": ""
+                  }
+          422:
+            description: "1010表示没有地址"
+            body:
+              application/json:
+                type: no_address_list_response
+  /config:
+    post:
+      description: "添加config信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: Config_Add
+      responses:
+        200:
+          description: "0表示成功添加Config"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Config_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string"  
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "key": "commoditySessionGoods",
+                    "value": "https://oyoyo.nos-eastchina1.126.net/image/topic/%E6%97%A5%E7%94%A8%E5%93%81%E4%B8%93%E9%A2%98.jpg",
+                    "content": "150058,115000,150237,150239,150238,114868,150269,150270,150272,150271,114757",
+                    "update_time": "2015-05-23 12:30:00",
+                    "create_time": "2015-05-23 12:30:00"
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1表示请求参数中key不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1024表示该key已存在"
+          body:
+            application/json:
+              type: exist_config_response
+    get:
+      description: "查询所有config"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      responses:
+        200:
+          description: "0表示查询成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Config_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string"  
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "key": "commoditySessionGoods",
+                      "value": "<p><img src='https://oyoyo.nos-eastchina1.126.net/image/topic/%E6%97%A5%E7%94%A8%E5%93%81%E4%B8%93%E9%A2%98.jpg'/></p>",
+                      "content": "150058,115000,150237,150239,150238,114868,150269,150270,150272,150271,114757",
+                      "update_time": "2015-05-23 12:30:00",
+                      "create_time": "2015-05-23 12:30:00"
+                    }
+                  ],
+                  "message": ""
+                }
+        422:
+          description: "1011表示没有该config"
+          body:
+            application/json:
+              type: no_config_list_response
+    put:
+      description: "修改config信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: Config_Update
+      responses:
+        200:
+          description: "0表示成功修改Config"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Config_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "key": "commoditySessionGoods",
+                    "value": "<p><img src='https://oyoyo.nos-eastchina1.126.net/image/topic/%E6%97%A5%E7%94%A8%E5%93%81%E4%B8%93%E9%A2%98.jpg'/></p>",
+                    "content": "150058,115000,150237,150239,150238,114868,150269,150270,150272,150271,114757",
+                    "update_time": "2015-05-23 12:30:00",
+                    "create_time": "2015-05-23 12:30:00"
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1表示请求参数中key不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1011表示没有该Config"
+          body:
+            application/json:
+              type: no_config_response
+    delete:
+      description: "删除config信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        config_key:
+          type: config_key
+      responses:
+        200:
+          description: "0表示删除config成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1011表示没有该Config"
+          body:
+            application/json:
+              type: no_config_code_response
+    /store:
+      post:
+        description: "创建store信息"
+        body:
+          application/json:
+            type: Store_Add
+        responses:
+          200:
+            description: "0表示添加store成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Store_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string"
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 101,
+                      "create_time": "2018-01-05 09:49:32",
+                      "update_time": "2018-01-05 09:49:32",
+                      "business_id": 114607,
+                      "link_url": "/pages/discount-list/index",
+                      "rank_order": 0,
+                      "pic_url": "https://cdn.it120.cc/apifactory/2019/01/15/c0928f48056f17ca1bdafb2bf151ff08.png",
+                      "status": 0,
+                      "status_string": "显示",
+                      "title": "折扣区",
+                      "content": "组合购",
+                      "subtype": "",
+                      "store_key": "infantSession",
+                      "type": "newcoupons"
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1表示body中store_key为null或者type为null"
+            body:
+              application/json:
+                type: required_missing_code_response
+      get:
+        description: "查询store信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        responses:
+          200:
+            description: "0表示查询store信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Store_Response[]
+                  message:
+                    required: true
+                    description: ""
+                    type: "string"  
+                example: |
+                  {
+                    "code": 0,
+                    "data": [
+                      {
+                        "id": 101,
+                        "create_time": "2015-05-23 12:30:00",
+                        "update_time": "2015-05-23 12:30:00",
+                        "business_id": 114607,
+                        "link_url": "/pages/discount-list/index",
+                        "rank_order": 0,
+                        "pic_url": "https://cdn.it120.cc/apifactory/2019/01/15/c0928f48056f17ca1bdafb2bf151ff08.png",
+                        "status": 0,
+                        "status_string": "显示",
+                        "title": "折扣区",
+                        "content": "组合购",
+                        "subtype": "",
+                        "store_key": "infantSession",
+                        "type": "newcoupons"
+                      }
+                    ],
+                    "message": ""
+                  }
+          421:
+            description: "1012表示没有该store"
+            body:
+              application/json:
+                type: no_store_list_response
+      put:
+        description: "修改store信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        body:
+          application/json:
+            type: Store_Update
+        responses:
+          200:
+            description: "修改store信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Store_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 101,
+                      "create_time": "2015-05-23 12:30:00",
+                      "update_time": "2015-05-23 12:30:00",
+                      "business_id": 114607,
+                      "link_url": "/pages/discount-list/index",
+                      "rank_order": 0,
+                      "pic_url": "https://cdn.it120.cc/apifactory/2019/01/15/c0928f48056f17ca1bdafb2bf151ff08.png",
+                      "status": 0,
+                      "status_string": "显示",
+                      "title": "折扣区",
+                      "content": "组合购",
+                      "subtype": "",
+                      "store_key": "infantSession",
+                      "type": "newcoupons"
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1表示body中ID不能为null"
+            body:
+              application/json:
+                type: required_missing_code_response
+          422:
+            description: "1012表示没有该store"
+            body:
+              application/json:
+                type: no_store_response
+      delete:
+        description: "删除store信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          store_id:
+            type: store_id
+        responses:
+          204:
+            description: "0表示删除store信息成功"
+            body:
+              application/json:
+                type: success_response
+          422:
+            description: "1012表示没有该store"
+            body:
+              application/json:
+                type: no_config_code_response
+  post:
+    description: "注册管理员"
+    queryParameters:
+      username:
+        type: username
+      password:
+        type: password
+    responses:
+      200:
+        description: "0表示注册管理员成功"
+        body:
+          application/json:
+            type: success_response
+      422:
+        description: "1019表示已存在同名管理员"
+        body:
+          application/json:
+            type: admin_existed_code_response
+  /login:
+    post:
+      description: "管理员登录"
+      queryParameters:
+        username:
+          type: username
+        password:
+          type: password
+      responses:
+        200:
+          description: "0表示管理员登录成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Admin_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string"
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 12313,
+                    "username": "test",
+                    "login_token": "asdsadEEEE123"
+                  },
+                  "message": ""
+                }
+        500:
+          description: "-1表示服务器错误"
+          body:
+            application/json:
+              type: internal_error_response
+        421:
+          description: "1000表示没有该管理员"
+          body:
+            application/json:
+              type: no_such_user_response
+        422:
+          description: "1018表示请求参数的密码不正确"
+          body:
+            application/json:
+              type: admin_password_error_response
+  /logout:
+    post:
+      description: "管理员登出"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      responses:
+        200:
+          description: "0表示管理员登出成功"
+          body:
+            application/json:
+              type: success_response
+  /reward/confirm_withdraw:
+    put:
+      description: "管理员确认提现"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        reward_money_withdraw_request_id:
+          type: reward_money_withdraw_request_id
+      responses:
+        200:
+          description: "0表示管理员确认提现成功"
+          body:
+            application/json:
+              type: success_response
+        500:
+          description: "2表示提现ID不存在, 还表示提现状态必须为withdraw_pending(这部分其实报-1的code)"
+          body:
+            application/json:
+              type: input_invalid_code_response
+        421:
+          description: "1001表示管理员登录token无效"
+          body:
+            application/json:
+              type: login_token_invalid_code_response
+  /mining:
+    /mine_one_block:
+      post:
+        description: "管理员手动挖矿"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        responses:
+          200:
+            description: "0表示管理员手动挖矿成功"
+            body:
+              application/json:
+                type: "object"
+                example: |
+                  {
+                    "code": 0,
+                    "data": "",
+                    "message": "success"
+                  }
+          421:
+            description: "1001表示管理员登录token无效"
+            body:
+              appliation/json:
+                type: login_token_invalid_code_response
+    /set_mining_start:
+      post:
+        description: "管理员开启矿机"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        responses:
+          200:
+            description: "0表示管理员手动开启挖矿成功"
+            body:
+              application/json:
+                type: "object"
+                example: |
+                  {
+                    "code": 0,
+                    "data": "",
+                    "message": "success"
+                  }
+          421:
+            description: "1001表示管理员登录token无效"
+            body:
+              appliation/json:
+                type: login_token_invalid_code_response
+    /set_mining_stop:
+      post:
+        description: "管理员停止矿机"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        responses:
+          200:
+            description: "0表示管理员手动开启挖矿成功"
+            body:
+              application/json:
+                type: "object"
+                example: |
+                  {
+                    "code": 0,
+                    "data": "",
+                    "message": "success"
+                  }
+          421:
+            description: "1001表示管理员登录token无效"
+            body:
+              appliation/json:
+                type: login_token_invalid_code_response
+  /withdraw_request:
+    get:
+      description: "管理员查询提现记录"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        user_token:
+          type: user_token
+        status:
+          type: withdraw_request_status
+      responses:
+        200:
+          description: "2表示该用户不是会员"
+          body:
+            application/json:
+              type: input_invalid_list_response
+        421:
+          description: "1000表示没有该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_list_response
+        422:
+          description: "1001表示管理员登录token无效"
+          body:
+            appliation/json:
+              type: login_token_invalid_code_response
+  /register_vip:
+    post:
+      description: "管理员注册vip"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        user_id:
+          type: user_id
+      responses:
+        200:
+          description: "0表示管理员注册vip成功"
+          body:
+            applicaiton/json:
+              type: success_response
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+        422:
+          description: "1001表示管理员登录token无效"
+          body:
+            appliation/json:
+              type: login_token_invalid_code_response
+  /shop/goods:
+    post:
+      description: "管理员添加商品信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: Goods_Add
+      responses:
+        200:
+          description: "0表示管理员添加商品信息成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1表示分类ID不能为null或者商品名称不能为null或者标题图片size不能小于0或者SkuPrice的size不能小于0"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1017表示该cateogry不存在"
+          body:
+            application/json:
+              type: no_category_code_response
+    put:
+      description: "管理员修改商品信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: Goods_Update
+      responses:
+        200:
+          description: "0表示管理员修改商品信息成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1表示商品ID不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1008表示该商品不存在"
+          body:
+            applcation/json:
+              type: no_such_goods_code_response
+    delete:
+      description: "管理员下架商品"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        goods_id:
+          type: goods_id
+      responses:
+        200:
+          description: "0表示管理员下架商品成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1008表示该商品不存在"
+          body:
+            applcation/json:
+              type: no_such_goods_code_response
+    /list:
+      get:
+        description: "管理员查询商品信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          page:
+            type: page
+          page_size:
+            type: page_size
+        responses:
+          200:
+            description: "0表示管理员查询商品信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Goods_Basic_Info_DTO_Response[]
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": [
+                      {
+                        "id": 10111,
+                        "number_of_sold": 0,
+                        "number_of_favorite": 0,
+                        "number_of_good_comments": 0,
+                        "number_of_ordered": 0,
+                        "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg",
+                        "vip_price": 4000,
+                        "as_bundle": true,
+                        "stores": 500,
+                        "weight": 0,
+                        "original_price": 6800,
+                        "no_sale_price": 6800,
+                        "status": 0,
+                        "status_string": "上架",
+                        "order_rank": 11,
+                        "name": "德国Doppelherz双心 蓝莓叶黄素营养护眼胶囊 30粒/盒 缓解眼疲劳",
+                        "category": 101011,
+                        "characteristic": "纯黑植物天然无刺激遮白发",
+                        "available_time": "2014-5-5 10:10:20",
+                        "description": "https://oyoyo.nos-eastchina1.126.net/image/product/Sanotint%E5%9C%A3%E4%B8%9D%E5%A9%B7%E6%9F%93%E5%8F%91%E5%89%82.jpg",
+                        "maximum_reward": 860,
+                        "minimum_reward": 258,
+                        "property_category": "11203",
+                        "properties": "43210,43211,43212,43213,43214,43215,43216,43217,43218,43219",
+                        "recommend_status": 0,
+                        "recommend_status_string": "推荐",
+                        "related_goods_ids": "115026,115027",
+                        "sale_price": 6800,
+                        "tags": [
+                          {
+                            "id": 1212,
+                            "title": "热卖"
+                          }
+                        ],
+                        "key": "1"
+                      }
+                    ],
+                    "message": ""
+                  }
+    /detail:
+      get:
+        description: "管理员查询商品详情"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          goods_id:
+            type: goods_id
+        responses:
+          200:
+            description: "0表示管理员查询商品详情成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Goods_Detail_DTO_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "basic_info": {
+                        "id": 10111,
+                        "number_of_sold": 0,
+                        "number_of_favorite": 0,
+                        "number_of_good_comments": 0,
+                        "number_of_ordered": 0,
+                        "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg",
+                        "vip_price": 4000,
+                        "as_bundle": true,
+                        "stores": 500,
+                        "weight": 0,
+                        "original_price": 6800,
+                        "no_sale_price": 6800,
+                        "status": 0,
+                        "status_string": "上架",
+                        "order_rank": 11,
+                        "name": "德国Doppelherz双心 蓝莓叶黄素营养护眼胶囊 30粒/盒 缓解眼疲劳",
+                        "category": 101011,
+                        "characteristic": "纯黑植物天然无刺激遮白发",
+                        "available_time": "2014-5-5 10:10:20",
+                        "description": "https://oyoyo.nos-eastchina1.126.net/image/product/Sanotint%E5%9C%A3%E4%B8%9D%E5%A9%B7%E6%9F%93%E5%8F%91%E5%89%82.jpg",
+                        "maximum_reward": 860,
+                        "minimum_reward": 258,
+                        "property_category": "11203",
+                        "properties": "43210,43211,43212,43213,43214,43215,43216,43217,43218,43219",
+                        "recommend_status": 0,
+                        "recommend_status_string": "推荐",
+                        "related_goods_ids": "115026,115027",
+                        "sale_price": 6800,
+                        "tags": [
+                          {
+                            "id": 1212,
+                            "title": "热卖"
+                          }
+                        ],
+                        "key": "1"
+                      },
+                      "category": {
+                        "id": 1231,
+                        "name": "爱他美",
+                        "key": "1",
+                        "order_rank": 1,
+                        "type": "",
+                        "is_use": true,
+                        "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+                        "pid": 35102,
+                        "level": 2,
+                        "max_depth": 2,
+                        "goods_numbers": 9,
+                        "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg",
+                        "create_time": "2014-4-4 10:10:10",
+                        "update_time": "2014-4-4 10:10:10",
+                        "show_list": true
+                      },
+                      "pics": [
+                        {
+                          "id": 12111,
+                          "goods_id": 123144,
+                          "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg"
+                        }
+                      ],
+                      "property_category": {
+                        "id": 12121,
+                        "create_time": "2014-4-4 10:10:10",
+                        "update_time": "2014-4-4 10:10:10",
+                        "name": "雪本诗面膜",
+                        "order_rank": 1
+                      }
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1008表示该商品不存在"
+            body:
+              application/json:
+                type: no_such_goods_response
+    /category:
+      post:
+        description: "管理员添加分类信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        body:
+          application/json:
+            type: Category_Add
+        responses:
+          200:
+            description: "0表示管理员添加分类信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Category_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1231,
+                      "name": "爱他美",
+                      "key": "1",
+                      "order_rank": 1,
+                      "type": "",
+                      "is_use": true,
+                      "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+                      "pid": 35102,
+                      "level": 2,
+                      "max_depth": 2,
+                      "goods_numbers": 9,
+                      "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg",
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2014-4-4 10:10:10",
+                      "show_list": true
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1表示请求参数中level,name,key不能为null, 并且除了一级分类, 请求参数icon与pid不能为null"
+            body:
+              application/json:
+                type: required_missing_code_response
+      put:
+        description: "管理员修改分类信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        body:
+          application/json:
+            type: Category_Update
+        responses:
+          200:
+            description: "0表示管理员修改分类信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Category_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1231,
+                      "name": "爱他美",
+                      "key": "1",
+                      "order_rank": 1,
+                      "type": "",
+                      "is_use": true,
+                      "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+                      "pid": 35102,
+                      "level": 2,
+                      "max_depth": 2,
+                      "goods_numbers": 9,
+                      "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg",
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2014-4-4 10:10:10",
+                      "show_list": true
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1表示请求参数中分类ID不能为null"
+            body:
+              application/json:
+                type: required_missing_response
+          422:
+            description: "1017表示该父分类不存在"
+            body:
+              application/json:
+                type: no_category_response
+      delete:
+        description: "管理员删除分类信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          category_id:
+            type: category_id
+        responses:
+          204:
+            description: "0表示管理员删除分类信息成功"
+            body:
+              application/json:
+                type: success_response
+          421:
+            description: "1017表示该分类不存在"
+            body:
+              application/json:
+                type: no_category_code_response
+    /property_category:
+      post:
+        description: "管理员创建款式分类信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        body:
+          application/json:
+            type: Property_Category_Add
+        responses:
+          200:
+            description: "0表示管理员创建款式分类信息成功"
+            body:
+              application/json:
+                type: Property_Category_Response
+                example: |
+                  {
+                    "id": 12121,
+                    "create_time": "2014-4-4 10:10:10",
+                    "update_time": "2014-4-4 10:10:10",
+                    "name": "雪本诗面膜",
+                    "order_rank": 1
+                  }
+      /list:
+        get:
+          description: "管理员查询款式分类信息"
+          queryParameters:
+            admin_token:
+              type: admin_token
+          responses:
+            200:
+              description: "0表示管理员查询款式分类信息成功"
+              body:
+                application/json:
+                  type: Property_Category_Response[]
+                  example: |
+                    [
+                      {
+                        "id": 12121,
+                        "create_time": "2014-4-4 10:10:10",
+                        "update_time": "2014-4-4 10:10:10",
+                        "name": "雪本诗面膜",
+                        "order_rank": 1
+                      }
+                    ]
+        put:
+          description: "管理员修改款式分类信息"
+          queryParameters:
+            admin_token:
+                type: admin_token
+          body:
+            application/json:
+              type: Property_Category_Update
+          responses:
+            200:
+              description: "0表示管理员修改款式分类信息成功"
+              body:
+                application/json:
+                  properties:
+                    code:
+                      required: true
+                      description: "响应码"
+                      type: "integer"
+                    data:
+                      type: Property_Category_Response
+                    message:
+                      required: true
+                      description: ""
+                      type: "string" 
+                  example: |
+                    {
+                      "code": 0,
+                      "data": {
+                        "id": 12121,
+                        "create_time": "2014-4-4 10:10:10",
+                        "update_time": "2014-4-4 10:10:10",
+                        "name": "雪本诗面膜",
+                        "order_rank": 1
+                        },
+                      "message": ""
+                    }
+            421:
+              description: "1026表示该款式分类不存在"
+              body:
+                application/json:
+                  type: no_property_category_response
+    /tag:
+      post:
+        description: "管理员添加标签"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          tag_title:
+            type: tag_title
+        responses:
+          200:
+            description: "管理员添加标签成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Tag_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string"
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1212,
+                      "title": "热卖"
+                    },
+                    "message": ""
+                  }
+      /list:
+        get:
+          description: "管理员查询标签"
+          queryParameters:
+            admin_token:
+              type: admin_token
+          responses:
+            100:
+              description: "0表示管理员查询标签成功"
+              body:
+                application/json:
+                  properties:
+                    code:
+                      required: true
+                      description: "响应码"
+                      type: "integer"
+                    data:
+                      type: Tag_Response[]
+                    message:
+                      required: true
+                      description: ""
+                      type: "string" 
+                  example: |
+                    {
+                      "code": 0,
+                      "data": [
+                        {
+                          "id": 1212,
+                          "title": "热卖"
+                        }
+                      ],
+                      "message": ""
+                    }
+      put:
+        description: "管理员修改标签"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          tag_title:
+            type: tag_title
+          tag_id:
+            type: tag_id
+        responses:
+          200:
+            description: "0表示管理员修改标签成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Tag_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1212,
+                      "title": "热卖"
+                    },
+                    "message": ""
+                  }
+          422:
+            description: "1025表示该标签不存在"
+            body:
+              application/json:
+                type: no_tag_response
+      delete:
+        description: "管理员删除标签"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          tag_id:
+            type: tag_id
+        responses:
+          200:
+            description: "0表示管理员删除标签成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Tag_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1212,
+                      "title": "热卖"
+                    },
+                    "message": ""
+                  }
+          422:
+            description: "1025表示该标签不存在"
+            body:
+              application/json:
+                type: no_tag_response
+  /cms:
+    post:
+      description: "管理员创建新闻信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: News_Add
+      responses:
+        200:
+          description: "0表示管理员创建新闻信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: News_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 1231,
+                    "category_id": 12313,
+                    "description": "爱上美丽，爱上你自己",
+                    "key_words": "114644,114642,114871,115264",
+                    "rank_order": 2,
+                    "pic": "https://cdn.it120.cc/apifactory/2019/01/20/853c2d6dac12d400aafdeff19dfb83fc.jpg",
+                    "title": "有机护肤",
+                    "number_of_views": 7135,
+                    "content": "https://oyoyo.nos-eastchina1.126.net/image/topic/%E5%BE%B7%E5%9B%BD%E4%B8%96%E5%AE%B62.jpg",
+                    "create_time": "2014-4-4 10:10:10",
+                    "update_time": "2014-4-4 10:10:10",
+                    "status": 2,
+                    "status_string": "审核通过"
+                  },
+                  "message": ""
+                }
+        422:
+          description: "1表示请求参数中category_id, content, title都不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+    put:
+      description: "管理员修改新闻信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: News_Update
+      responses:
+        200:
+          description: "0表示管理员修改新闻信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: News_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 1231,
+                    "category_id": 12313,
+                    "description": "爱上美丽，爱上你自己",
+                    "key_words": "114644,114642,114871,115264",
+                    "rank_order": 2,
+                    "pic": "https://cdn.it120.cc/apifactory/2019/01/20/853c2d6dac12d400aafdeff19dfb83fc.jpg",
+                    "title": "有机护肤",
+                    "number_of_views": 7135,
+                    "content": "https://oyoyo.nos-eastchina1.126.net/image/topic/%E5%BE%B7%E5%9B%BD%E4%B8%96%E5%AE%B61.jpg",
+                    "create_time": "2014-4-4 10:10:10",
+                    "update_time": "2014-4-4 10:10:10",
+                    "status": 2,
+                    "status_string": "审核通过"
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1表示请求参数中id不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1013表示该News不存在"
+          body:
+            application/json:
+              type: no_news_response
+    delete:
+      description: "管理员删除新闻信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        news_id:
+          type: news_id
+      responses:
+        200:
+          description: "0表示管路员删除新闻信息成功"
+          body:
+            application/json:
+              type: success_response
+        422:
+          description: "1013表示该News不存在"
+          body:
+            application/json:
+              type: no_news_code_response
+    /category:
+      post:
+        description: "管理员添加新闻分类信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        body:
+          application/json:
+            type: News_Category_Add
+        responses:
+          200:
+            description: "0表示管理员添加新闻分类成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: News_Category_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1231,
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2019-4-17 16:16:16",
+                      "as_use": true,
+                      "icon": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/topic%20icon/%E5%BD%A9%E5%A6%86.png",
+                      "name": "彩妆",
+                      "rank_order": 1
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1表示请求参数中as_use, icon, name都不能为null"
+            body:
+              application/json:
+                type: required_missing_code_response
+      put:
+        description: "管理员修改新闻分类信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+        body:
+          application/json:
+            type: News_Category_Update
+        responses:
+          200:
+            description: "0表示管理员修改新闻分类信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: News_Category_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1231,
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2019-4-17 16:16:16",
+                      "as_use": true,
+                      "icon": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/topic%20icon/%E5%BD%A9%E5%A6%86.png",
+                      "name": "彩妆",
+                      "rank_order": 1
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1表示请求参数中id不能为null"
+            body:
+              application/json:
+                type: required_missing_code_response
+          422:
+            description: "1014表示该NewsCategory不存在"
+            body:
+              application/json:
+                type: no_news_category_response
+      delete:
+        description: "管理员删除新闻分类信息"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          category_id:
+            type: news_category_id
+        responses:
+          204:
+            description: "0表示管理员删除新闻分类信息成功"
+            body:
+              application/json:
+                type: success_response
+          421:
+            description: "1014表示该NewsCategory不存在"
+            body:
+              application/json:
+                type: no_news_category_response
+          422:
+            description: "1022表示该category正在使用"
+            body:
+              application/json:
+                type: category_is_using
+  /notice:
+    post:
+      description: "管理员添加通知信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: Notice_Add
+      responses:
+        200:
+          description: "0表示管理员添加通知信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Notice_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                    "code": 0,
+                    "data": {
+                      "id": 123123,
+                      "content": "https://oyoyo.nos-eastchina1.126.net/image/notification/%E7%8E%A9%E6%B3%95.jpg",
+                      "as_use": true,
+                      "title": "玩法介绍",
+                      "type": "show",
+                      "create_time": "2019-4-20 6:6:6",
+                      "update_time": "2019-4-20 6:6:6",
+                      "show_list": false
+                    },
+                    "message": ""
+                }
+        422:
+          description: "1表示body中as_use, title, type不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+    put:
+      description: "管理员修改通知信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      body:
+        application/json:
+          type: Notice_Update
+      responses:
+        200:
+          description: "0表示管理员修改通知信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Notice_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 1221,
+                    "content": "https://oyoyo.nos-eastchina1.126.net/image/notification/%E7%8E%A9%E6%B3%95.jpg",
+                    "as_use": true,
+                    "title": "玩法介绍",
+                    "type": "show",
+                    "create_time": "2019-4-16 6:6:6",
+                    "update_time": "2019-4-17 6:6:6",
+                    "show_list": false
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1表示请求参数中id不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1015表示该通知不存在"
+          body:
+            application/json:
+              type: no_notice_code_response
+  /order:
+    get:
+      description: "管理员查询订单信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        status:
+          type: order_status
+      responses:
+        200:
+          description: "0表示管理员查询订单信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Order_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                        "id": 1231,
+                        "amount": 500,
+                        "amount_logistics": 50,
+                        "amount_real": 550,
+                        "create_time": "2019-4-16 6:6:6",
+                        "update_time": "2019-4-17 6:6:6",
+                        "close_time": "2019-4-17 6:6:6",
+                        "status": 0,
+                        "status_string": "待付款",
+                        "payment_status": 0,
+                        "payment_status_string": "未发起付款",
+                        "uid": 12311,
+                        "referrer_id": 123111,
+                        "block_id": 222,
+                        "comment": "尽快"
+                    }
+                  ],
+                  "message": ""
+                }
+    /confirm_reward:
+      put:
+        description: "管理员确认订单返利"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          order_id:
+            type: order_id
+        responses:
+          200:
+            description: "0表示管理员确认订单返利成功"
+            body:
+              application/json:
+                type: success_response
+          421:
+            description: "1000表示referrer_id不存在"
+            body:
+              application/json:
+                type: no_such_user_code_response
+          422:
+            description: "1001表示管理员登录token无效"
+            body:
+              application/json:
+                type: login_token_invalid_code_response
+          423:
+            description: "1003表示订单不存在"
+            body:
+              application/json:
+                type: no_such_order_code_response
+    /set_paid:
+      put:
+        description: "管理员确认支付"
+        queryParameters:
+          admin_token:
+            type: admin_token
+          order_id:
+            type: order_id
+        responses:
+          500:
+            description: "-1表示订单已付款"
+            body:
+              application/json:
+                type: internal_error_code_response
+          200:
+            description: "0表示管理员确认支付成功"
+            body:
+              application/json:
+                type: success_response
+          421:
+            description: "1001表示管理员登录token无效"
+            body:
+              appliation/json:
+                type: login_token_invalid_code_response
+          422:
+            description: "1003表示订单不存在"
+            body:
+              application/json:
+                type: no_such_order_code_response
+    put:
+      description: "管理员修改订单物流"
+      queryParameters:
+        admin_token:
+          type: admin_token
+        status:
+          type: order_id
+      body:
+        application/json:
+          description: "body中size必须大于0"
+          type: Logistics_Request[]
+          example: |
+            [
+              {
+                "number": "12312312154EDFF",
+                "company": "顺丰快递",
+                "detail_list": [
+                  {
+                    "time": "2019-4-4 6:6:6",
+                    "status": "快递正发往杭州"
+                  }
+                ],
+                "status": 0
+              }
+            ]
+      responses:
+        500:
+          description: "-1表示body中物流信息格式无效"
+          body:
+            application/json:
+              type: internal_error_response
+        200:
+          description: "0表示管理员设置物流信息成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1表示body中size不能小于0, 并且body中number不能为空串或者为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1003表示该订单不存在"
+          body:
+            application/json:
+              type: no_such_order_code_response
+  /user:
+    get:
+      description: "管理员查询用户信息"
+      queryParameters:
+        admin_token:
+          type: admin_token
+      responses:
+        200:
+          description: "0表示管理员查询用户信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: User_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 1231,
+                      "city": "杭州市",
+                      "invite_code": "11D33",
+                      "referrer_id": 1231,
+                      "login_token": "61ffdc90-352b-4137-85a4-db87e92724b0",
+                      "has_bind_referrer": true,
+                      "membership": true,
+                      "member_rank": -1,
+                      "rewarded_token": 0,
+                      "reward_money_pending": 0,
+                      "reward_money_balance": 0,
+                      "reward_money_withdraw_pending": 0,
+                      "reward_money_total": 0,
+                      "member_current_block_amount": 0,
+                      "avatar_url": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTINb3EmV5q6yvAicboTIYOok83uhyHGy7Nx6CrklJ8rxX4QO7Gu6rAJFl2u7L28OrUrQO00EQN0rRA/132",
+                      "nick_name": "test"
+                    }
+                  ],
+                  "message": ""
+                }
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_response
+/config:
+  /value:
+    get:
+      description: "用户查询Config"
+      queryParameters:
+        key:
+          type: config_key
+      responses:
+        200:
+          description: "0表示用户查询Config成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Config_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "key": "commoditySessionGoods",
+                    "value": "https://oyoyo.nos-eastchina1.126.net/image/topic/%E6%97%A5%E7%94%A8%E5%93%81%E4%B8%93%E9%A2%98.jpg",
+                    "content": "150058,115000,150237,150239,150238,114868,150269,150270,150272,150271,114757",
+                    "update_time": "2015-05-23 12:30:00",
+                    "create_time": "2015-05-23 12:30:00"
+                  },
+                  "message": ""
+                }
+        422:
+          description: "1011表示该Config不存在"
+          body:
+            application/json:
+              type: no_config_response
+  /store:
+    get:
+      description: "用户查询Store"
+      queryParameters:
+        type:
+          type: store_type
+        subtype:
+          type: store_subtype
+        store_key:
+          type: store_key
+      responses:
+        200:
+          description: "0表示用户查询Store成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Store_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 101,
+                      "create_time": "2018-01-05 09:49:32",
+                      "update_time": "2018-01-05 09:49:32",
+                      "business_id": 114607,
+                      "link_url": "/pages/discount-list/index",
+                      "rank_order": 0,
+                      "pic_url": "https://cdn.it120.cc/apifactory/2019/01/15/c0928f48056f17ca1bdafb2bf151ff08.png",
+                      "status": 0,
+                      "status_string": "显示",
+                      "title": "折扣区",
+                      "content": "组合购",
+                      "subtype": "",
+                      "store_key": "infantSession",
+                      "type": "newcoupons"
+                    }
+                  ],
+                  "message": ""
+                }
+        422:
+          description: "1012表示该Store不存在"
+          body:
+            application/json:
+              type: no_store_list_response
+/shop/goods:
+  /category:
+    /list:
+      get:
+        description: "用户查询分类信息"
+        queryParameters:
+          level:
+            type: category_level
+          key:
+            type: category_key
+        responses:
+          200:
+            description: "0表示用户查询分类信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Category_Response[]
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": [
+                      {
+                        "id": 1231,
+                        "name": "爱他美",
+                        "key": "1",
+                        "order_rank": 1,
+                        "type": "",
+                        "is_use": true,
+                        "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+                        "pid": 35102,
+                        "level": 2,
+                        "max_depth": 2,
+                        "goods_numbers": 9,
+                        "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg",
+                        "create_time": "2014-4-4 10:10:10",
+                        "update_time": "2014-4-4 10:10:10",
+                        "show_list": true
+                      }
+                    ],
+                    "message": ""
+                  }
+          422:
+            description: "1017表示该Category不存在"
+            body:
+              application/json:
+                type: no_category_list_response
+    /detail:
+      get:
+        description: "用户查询分类详细信息"
+        queryParameters:
+          id:
+            type: category_id
+        responses:
+          200:
+            description: "0表示用户查询分类详细信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Category_Response
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 1231,
+                      "name": "爱他美",
+                      "key": "1",
+                      "order_rank": 1,
+                      "type": "",
+                      "is_use": true,
+                      "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+                      "pid": 35102,
+                      "level": 2,
+                      "max_depth": 2,
+                      "goods_numbers": 9,
+                      "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg",
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2014-4-4 10:10:10",
+                      "show_list": true
+                    },
+                    "message": ""
+                  }
+          422:
+            description: "1017该Category不存在"
+            body:
+              application/json:
+                type: no_category_list_response
+  /detail:
+    get:
+      description: "用户查询商品详细信息"
+      queryParameters:
+        login_token:
+          type: user_token
+        id:
+          type: goods_id
+      responses:
+        200:
+          description: "0表示用户查询商品详细信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Goods_Detail_DTO_User_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "basic_info": {
+                    "id": 10111,
+                    "number_of_sold": 0,
+                    "number_of_favorite": 0,
+                    "number_of_good_comments": 0,
+                    "number_of_ordered": 0,
+                    "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg",
+                    "vip_price": 4000,
+                    "as_bundle": true,
+                    "stores": 500,
+                    "weight": 0,
+                    "original_price": 6800,
+                    "no_sale_price": 6800,
+                    "status": 0,
+                    "status_string": "上架",
+                    "order_rank": 11,
+                    "name": "德国Doppelherz双心 蓝莓叶黄素营养护眼胶囊 30粒/盒 缓解眼疲劳",
+                    "category": 101011,
+                    "characteristic": "纯黑植物天然无刺激遮白发",
+                    "available_time": "2014-5-5 10:10:20",
+                    "description": "https://oyoyo.nos-eastchina1.126.net/image/product/Sanotint%E5%9C%A3%E4%B8%9D%E5%A9%B7%E6%9F%93%E5%8F%91%E5%89%82.jpg",
+                    "maximum_reward": 860,
+                    "minimum_reward": 258,
+                    "property_category": "11203",
+                    "properties": "43210,43211,43212,43213,43214,43215,43216,43217,43218,43219",
+                    "recommend_status": 0,
+                    "recommend_status_string": "推荐",
+                    "related_goods_ids": "115026,115027",
+                    "sale_price": 6800,
+                    "tags": [
+                        {
+                        "id": 1212,
+                        "title": "热卖"
+                        }
+                    ],
+                    "key": "1"
+                    },
+                    "category": {
+                      "id": 1231,
+                      "name": "爱他美",
+                      "key": "1",
+                      "order_rank": 1,
+                      "type": "",
+                      "is_use": true,
+                      "icon": "https://cdn.it120.cc/apifactory/2019/01/15/c6700ea6d1526663dae325ecbe4873b6.png",
+                      "pid": 35102,
+                      "level": 2,
+                      "max_depth": 2,
+                      "goods_numbers": 9,
+                      "banner": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/%E5%8F%8C%E5%BF%83%E5%93%81%E7%89%8C.jpg",
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2014-4-4 10:10:10",
+                      "show_list": true
+                    },
+                    "pics": [
+                      {
+                        "id": 12111,
+                        "goods_id": 123144,
+                        "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg"
+                      }
+                    ],
+                    "property_category": {
+                      "id": 12121,
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2014-4-4 10:10:10",
+                      "name": "雪本诗面膜",
+                      "order_rank": 1
+                    },
+                    "description": "https://cdn.it120.cc/apifactory/2019/01/15/8970892a44bdd683f1151ae5bf674a86.jpg",
+                    "current_reward": 0,
+                    "top_reward": 0,
+                    "lowest_reward": 0
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1000表示用该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_response
+        422:
+          description: "1008表示该商品不存在"
+          body:
+            application/json:
+              type: no_such_goods_response
+  /list:
+    get:
+      description: "用户查询商品信息"
+      queryParameters:
+        keyword:
+          type: goods_keyword
+        category_id:
+          type: goods_category_id
+        key:
+          type: goods_key
+        recommend_status:
+          type: goods_recommend_status
+        login_token:
+          type: user_token
+        page:
+          type: page
+        page_size:
+          type: goods_page_size
+      responses:
+        200:
+          description: "0表示用户查询商品信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Goods_Basic_Info_DTO_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 10111,
+                      "number_of_sold": 0,
+                      "number_of_favorite": 0,
+                      "number_of_good_comments": 0,
+                      "number_of_ordered": 0,
+                      "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg",
+                      "vip_price": 4000,
+                      "as_bundle": true,
+                      "stores": 500,
+                      "weight": 0,
+                      "original_price": 6800,
+                      "no_sale_price": 6800,
+                      "status": 0,
+                      "status_string": "上架",
+                      "order_rank": 11,
+                      "name": "德国Doppelherz双心 蓝莓叶黄素营养护眼胶囊 30粒/盒 缓解眼疲劳",
+                      "category": 101011,
+                      "characteristic": "纯黑植物天然无刺激遮白发",
+                      "available_time": "2014-5-5 10:10:20",
+                      "description": "https://oyoyo.nos-eastchina1.126.net/image/product/Sanotint%E5%9C%A3%E4%B8%9D%E5%A9%B7%E6%9F%93%E5%8F%91%E5%89%82.jpg",
+                      "maximum_reward": 860,
+                      "minimum_reward": 258,
+                      "property_category": "11203",
+                      "properties": "43210,43211,43212,43213,43214,43215,43216,43217,43218,43219",
+                      "recommend_status": 0,
+                      "recommend_status_string": "推荐",
+                      "related_goods_ids": "115026,115027",
+                      "sale_price": 6800,
+                      "tags": [
+                        {
+                          "id": 1212,
+                          "title": "热卖"
+                        }
+                      ],
+                      "key": "1"
+                    }
+                  ],
+                  "message": ""
+                }
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_list_response
+        422:
+          description: "1008表示该商品不存在"
+          body:
+            application/json:
+              type: no_such_goods_list_response
+/price:
+    get:
+      description: "用户查询商品价格"
+      queryParameters:
+        goods_id:
+          type: goods_id
+        login_token:
+          type: user_token
+        property:
+          type: sku_price_property
+      responses:
+        200:
+          description: "0表示用户查询商品价格成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Sku_Price_User_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 1212,
+                    "original_price": 100,
+                    "real_price": 80,
+                    "current_reward": 10
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1000表示没有该用户"
+          body:
+            application/json:
+              type: no_such_user_response
+        422:
+          description: "1008表示没有该商品"
+          body:
+            application/json:
+              type: no_such_goods_list_response
+/cms:
+  /news:
+    get:
+      description: "用户查询新闻详细信息"
+      queryParameters:
+        id:
+          type: news_id
+      responses:
+        200:
+          description: "0表示用户查询新闻详细成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: News_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 1231,
+                    "category_id": 12313,
+                    "description": "爱上美丽，爱上你自己",
+                    "key_words": "114644,114642,114871,115264",
+                    "rank_order": 2,
+                    "pic": "https://cdn.it120.cc/apifactory/2019/01/20/853c2d6dac12d400aafdeff19dfb83fc.jpg",
+                    "title": "有机护肤",
+                    "number_of_views": 7135,
+                    "content": "https://oyoyo.nos-eastchina1.126.net/image/topic/%E5%BE%B7%E5%9B%BD%E4%B8%96%E5%AE%B62.jpg",
+                    "create_time": "2014-4-4 10:10:10",
+                    "update_time": "2014-4-4 10:10:10",
+                    "status": 2,
+                    "status_string": "审核通过"
+                  },
+                  "message": ""
+                }
+    /list:
+      get:
+        description: "用户查询新闻信息"
+        queryParameters:
+          category_id:
+            type: news_category_id_user
+        responses:
+          200:
+            description: "0表示用户查询新闻信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: News_User_Response[]
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": [
+                      {
+                        "id": 1231,
+                        "category_id": 12313,
+                        "description": "爱上美丽，爱上你自己",
+                        "key_words": "114644,114642,114871,115264",
+                        "rank_order": 2,
+                        "pic": "https://cdn.it120.cc/apifactory/2019/01/20/853c2d6dac12d400aafdeff19dfb83fc.jpg",
+                        "title": "有机护肤",
+                        "number_of_views": 7135,
+                        "create_time": "2014-4-4 10:10:10",
+                        "update_time": "2014-4-4 10:10:10",
+                        "status": 2,
+                        "status_string": "审核通过"
+                      }
+                    ],
+                    "message": ""
+                  }
+          422:
+            description: "1013表示该News不存在"
+            body:
+              application/json:
+                type: no_news_list_response
+  /category/list:
+    get:
+      description: "用户查询新闻分类信息"
+      responses:
+        200:
+          description: "0表示用户查询新闻分类信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: News_Category_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 1231,
+                      "create_time": "2014-4-4 10:10:10",
+                      "update_time": "2019-4-17 16:16:16",
+                      "as_use": true,
+                      "icon": "https://oyoyo.nos-eastchina1.126.net/image/topic%26brand/topic%20icon/%E5%BD%A9%E5%A6%86.png",
+                      "name": "彩妆",
+                      "rank_order": 1
+                    }
+                  ],
+                    "message": ""
+                }
+        422:
+          description: "1014表示该NewsCategory不存在"
+          body:
+            application/json:
+              type: no_news_category_list_response
+/notice:
+  get:
+    description: "用户查询通知详细信息"
+    queryParameters:
+      id:
+        type: notice_id
+    responses:
+      200:
+        description: "0表示用户查询通知信息成功"
+        body:
+          application/json:
+            properties:
+              code:
+                required: true
+                description: "响应码"
+                type: "integer"
+              data:
+                type: Notice_Response
+              message:
+                required: true
+                description: ""
+                type: "string" 
+            example: |
+              {
+                "code": 0,
+                "data": {
+                    "id": 123123,
+                    "content": "https://oyoyo.nos-eastchina1.126.net/image/notification/%E7%8E%A9%E6%B3%95.jpg",
+                    "as_use": true,
+                    "title": "玩法介绍",
+                    "type": "show",
+                    "create_time": "2019-4-20 6:6:6",
+                    "update_time": "2019-4-20 6:6:6",
+                    "show_list": false
+                },
+                "message": ""
+              }
+      422:
+        description: "1015表示该Notice不存在"
+        body:
+          application/json:
+            type: no_notice_response
+  /list:
+    get:
+      description: "用户查询通知信息"
+      queryParameters:
+        type:
+          type: notice_type
+      responses:
+        200:
+          description: "0表示用户查询通知信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Notice_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                     "id": 123123,
+                      "content": "https://oyoyo.nos-eastchina1.126.net/image/notification/%E7%8E%A9%E6%B3%95.jpg",
+                      "as_use": true,
+                      "title": "玩法介绍",
+                      "type": "show",
+                      "create_time": "2019-4-20 6:6:6",
+                      "update_time": "2019-4-20 6:6:6",
+                      "show_list": false
+                    }
+                  ],
+                  "message": ""
+                }
+        422:
+          description: "1015表示该Notice不存在"
+          body:
+            application/json:
+              type: no_notice_response
+/order:
+  /create:
+    post:
+      description: "用户创建订单"
+      body:
+        application/json:
+          type: Order_Add
+      responses:
+        500:
+          description: "-1表示body中goods_json_str格式有误"
+          body:
+            application/json:
+              type: internal_error_response
+        200:
+          description: "0表示用户创建订单成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Order_Add_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 12212,
+                    "amount": 100,
+                    "logistics_amount": 30,
+                    "real_amount": 130
+                  },
+                  "message": ""
+                }
+        421: 
+          description: "1表示body中login_token, goods_json_str, address, mobile, recipient_id_card, recipient_name, post_code, province_string, city_string都不能为null"
+          body:
+            application/json:
+              type: required_missing_response
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_response
+  /pay:
+    post:
+      description: "用户订单支付"
+      queryParameters:
+        login_token:
+          type: user_token
+        id:
+          type: order_id
+      responses:
+        500:
+          description: "-1表示Generate prepay error"
+          body:
+            application/json:
+              type: internal_error_list_response
+        200:
+          description: "0表示用户订单支付成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Pre_Pay_DTO_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "appId": "wxd678efh567hg6787",
+                    "timeStamp": "",
+                    "nonceStr": "5K8264ILTKCH16CQ2502SI8ZNMTM67VS",
+                    "package": "",
+                    "signType": "MD5",
+                    "paySign": "C380BEC2BFD727A4B6845133519F3AD6"
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_list_response
+        422:
+          description: "1003表示该订单不存在"
+          body:
+            application/json:
+              type: no_such_order_list_response
+        423:
+          description: "1004表示用户与订单不匹配"
+          body:
+            application/json:
+              type: order_user_not_match_list_response
+  /complete:
+    post:
+      description: "用户完成订单"
+      queryParameters:
+        login_token:
+          type: user_token
+        id:
+          type: order_id
+      responses:
+        200:
+          description: "0表示用户完成订单成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+        422:
+          description: "1003表示该订单不存在"
+          body:
+            application/json:
+              type: no_such_order_code_response
+  /close:
+    post:
+      description: "用户关闭订单"
+      queryParameters:
+        login_token:
+          type: user_token
+        status:
+          type: order_status
+      responses:
+        200:
+          description: "0表示用户关闭订单成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+        422:
+          description: "1003表示该订单不存在"
+          body:
+            application/json:
+              type: no_such_order_code_response
+  /list:
+    get:
+      description: "用户查询订单信息"
+      queryParameters:
+        login_token:
+          type: user_token
+        status:
+          type: order_status
+      responses:
+        200:
+          description: "0表示用户查询订单信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Order_Goods_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 1234,
+                      "amount": 100,
+                      "amount_reward": 10,
+                      "order_id": 11112,
+                      "property_string": "benecos口红:豆沙色",
+                      "property": "10450:41200",
+                      "uid": 12313,
+                      "referrer_id": 11111,
+                      "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg",
+                      "number": 1,
+                      "goods_name": "Annemarie Borlind安娜柏林再生洗面奶150ml"
+                    }
+                  ],
+                  "message": ""
+                }
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_list_response
+  /detail:
+    get:
+      description: "用户查询订单详情信息"
+      queryParameters:
+        login_token:
+          type: user_token
+        id:
+          type: order_id
+      responses:
+        500:
+          description: "-1表示物流信息格式错误"
+          body:
+            application/json:
+              type: internal_error_response
+        200:
+          description: "0表示用户查询订单详情信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Order_User_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 1231,
+                    "amount": 500,
+                    "amount_logistics": 50,
+                    "amount_real": 550,
+                    "create_time": "2019-4-16 6:6:6",
+                    "update_time": "2019-4-17 6:6:6",
+                    "close_time": "2019-4-17 6:6:6",
+                    "status": 0,
+                    "status_string": "待付款",
+                    "payment_status": 0,
+                    "payment_status_string": "未发起付款",
+                    "uid": 12311,
+                    "referrer_id": 123111,
+                    "block_id": 222,
+                    "order_goods": [
+                      {
+                        "id": 1234,
+                        "amount": 100,
+                        "amount_reward": 10,
+                        "order_id": 11112,
+                        "property_string": "benecos口红:豆沙色",
+                        "property": "10450:41200",
+                        "uid": 12313,
+                        "referrer_id": 11111,
+                        "pic": "https://cdn.it120.cc/apifactory/2019/01/23/c2a2f628ddec7e5e7d7571536add23f4.jpg",
+                        "number": 1,
+                        "goods_name": "Annemarie Borlind安娜柏林再生洗面奶150ml"
+                      }
+                    ],
+                    "address": "保亿中心2601",
+                    "province_string": "浙江省",
+                    "city_string": "杭州市",
+                    "district_string": "萧山区",
+                    "post_code": "邮件编码",
+                    "recipient_name": "test",
+                    "recipient_id_card": "330330330330330330",
+                    "mobile": "17858441231",
+                    "comment": "尽快",                
+                    "logistics_status": 0,
+                    "logistics": [
+                      {
+                        "number": "12312312154EDFF",
+                        "company": "顺丰快递",
+                        "detail_list": [
+                          {
+                            "time": "2019-4-4 6:6:6",
+                            "status": "快递正发往杭州"
+                          }
+                        ],
+                        "status": 0
+                      }
+                    ]
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_response
+        422:
+          description: "1003表示该订单不存在"
+          body:
+            application/json:
+              type: no_such_order_response
+  /statistics:
+    get:
+      description: "用户查询订单信息"
+      queryParameters:
+        login_token:
+          type: user_token
+      responses:
+        200:
+          description: "0表示用户查询订单信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Order_Statistics_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "pending_payment": 1,
+                    "finished_payment": 1,
+                    "pending_delivery": 1,
+                    "finished": 1
+                  },
+                  "message": ""
+                }
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_response
+/qrcode:
+  /generate_qrcode:
+    post:
+      description: "生成二维码"
+      queryParameters:
+        login_token:
+          type: user_token
+        scene:
+          description: "可以是用户ID"
+          required: true
+          type: "string"
+          example: "121212"
+        page:
+          description: "小程序存在的页面地址"
+          required: false
+          type: "string"
+          example: "pages/index/index"
+      responses:
+        500:
+          description: "-1表示微信端出现错误"
+          body:
+            application/json:
+              example: |
+                {
+                  "code": -1,
+                  "data": {
+                    "file_path": null
+                  },
+                  "message": ""
+                }
+        200:
+          description: "0表示生成二维码成功"
+          body:
+            application/json:
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "file_path": "/qrcode/download_file?file_name=qrcode1362524142888935187.jpg"
+                  },
+                  "message": ""
+                }
+        421:
+          description: "2表示请求参数中page不存在"
+          body:
+            application/json:
+              type: input_invalid_response
+        422:
+          description: "1000表示没有该用户"
+          body:
+            application/json:
+              type: no_such_user_response
+  /download_file:
+    get:
+      description: "下载二维码"
+      queryParameters:
+        file_name:
+          type: file_name
+      responses:
+        200:
+          description: "下载二维码成功"
+/reward:
+  /withdraw:
+    post:
+      description: "会员提现"
+      queryParameters:
+        login_token:
+          type: user_token
+        reward_money_withdraw_pending:
+          type: reward_money_withdraw_pending
+      responses:
+        200:
+          description: "0表示会员提现成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1表示请求参数中reward_money_withdraw_pending不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+  /withdraw_log:
+    get:
+      description: "用户查询提现记录"
+      queryParameters:
+        login_token:
+          type: user_token
+        page:
+          type: page
+        page_size:
+          type: withdraw_log_page_size
+      responses:
+        200:
+          description: "0表示用户查询提现记录成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Reward_Money_Withdraw_Request_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 12121,
+                      "member_id": 12312,
+                      "amount": 100,
+                      "status": 2,
+                      "status_string": "withdraw_pending",
+                      "create_time": "2019-4-17 6:6:6",
+                      "update_time": "2019-4-18 6:6:6"
+                    }
+                  ],
+                  "message": ""
+                }
+        421:
+          description: "1表示reward_money_withdraw_pending不能为null"
+          body:
+            application/json:
+              type: required_missing_list_response
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_list_response
+/user:
+  /address:
+    post:
+      description: "用户添加地址"
+      body:
+        application/json:
+          type: Address_Add
+      responses:
+        200:
+          description: "0表示用户添加地址成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1表示body中login_token, address, city_id, city_string, post_code, mobile, province_id, province_string, recipient_name, recipient_id_card"
+          body:
+            application/json:
+              type: required_misssing_code_response
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+        423:
+          description: "1020表示body中mobile检验失败"
+          body:
+            application/json:
+              type: error_phone_code_response
+        424:
+          description: "1021表示body中recipient_id_card检验失败"
+          body:
+            application/json:
+              type: error_recipient_id_card_code_response
+    /default:
+      get:
+        description: "用户获取默认地址"
+        queryParameters:
+          login_token:
+            type: user_token
+        responses:
+          200:
+            description: "0表示用户获取默认地址成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                      required: true
+                      description: "响应码"
+                      type: "integer"
+                  data:
+                      type: Address_Response
+                  message:
+                      required: true
+                      description: ""
+                      type: "string"  
+                example: |
+                  {
+                    "code": 0,
+                    "data": {
+                      "id": 132123,
+                      "address": "保亿中心B座2601",
+                      "district_id": 1,
+                      "district_string": "萧山区",
+                      "city_id": 11,
+                      "city_string": "杭州市",
+                      "post_code": "325001",
+                      "create_time": "2019-4-17 6:6:6",
+                      "update_time": "2019-4-17 6:6:6",
+                      "as_default": true,
+                      "recipient_name": "test",
+                      "mobile": "18668480196",
+                      "province_id": 111,
+                      "province_string": "浙江省",
+                      "status": 0,
+                      "status_string": "未知",
+                      "user_id": 12341,
+                      "recipient_id_card": "500239199005080018"
+                    },
+                    "message": ""
+                  }
+          421:
+            description: "1000表示该用户不存在"
+            body:
+              application/json:
+                type: no_such_user_code_response
+          422:
+            description: "1010表示该地址不存在"
+            body:
+              application/json:
+                type: no_address_code_response
+    delete:
+      description: "用户删除地址信息"
+      queryParameters:
+        login_token:
+          type: user_token
+        id:
+          type: address_id
+      responses:
+        204:
+          description: "0表示用户删除地址信息成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+        422:
+          description: "1010表示该地址不存在"
+          body:
+            application/json:
+              type: no_address_code_response
+    get:
+      description: "用户获取详细地址信息"
+      queryParameters:
+        login_token:
+          type: user_token
+        id:
+          type: address_id
+      responses:
+        200:
+          description: "0表示用户获取详细地址信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Address_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string"  
+              example: |
+                {
+                "code": 0,
+                "data": {
+                    "id": 132123,
+                    "address": "保亿中心B座2601",
+                    "district_id": 1,
+                    "district_string": "萧山区",
+                    "city_id": 11,
+                    "city_string": "杭州市",
+                    "post_code": "325001",
+                    "create_time": "2019-4-17 6:6:6",
+                    "update_time": "2019-4-17 6:6:6",
+                    "as_default": true,
+                    "recipient_name": "test",
+                    "mobile": "18668480196",
+                    "province_id": 111,
+                    "province_string": "浙江省",
+                    "status": 0,
+                    "status_string": "未知",
+                    "user_id": 12341,
+                    "recipient_id_card": "500239199005080018"
+                },
+                "message": ""
+                }
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+        422:
+          description: "1010表示该地址不存在"
+          body:
+            application/json:
+              type: no_address_code_response
+    /list:
+      get:
+        description: "用户获取地址信息"
+        queryParameters:
+          login_token:
+            type: user_token
+        responses:
+          200:
+            description: "0表示用户获取地址信息成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Address_Response[]
+                  message:
+                    required: true
+                    description: ""
+                    type: "string" 
+                example: |
+                  {
+                    "code": 0,
+                    "data": [
+                      {
+                        "id": 132123,
+                        "address": "保亿中心B座2601",
+                        "district_id": 1,
+                        "district_string": "萧山区",
+                        "city_id": 11,
+                        "city_string": "杭州市",
+                        "post_code": "325001",
+                        "create_time": "2019-4-17 6:6:6",
+                        "update_time": "2019-4-17 6:6:6",
+                        "as_default": true,
+                        "recipient_name": "test",
+                        "mobile": "18668480196",
+                        "province_id": 111,
+                        "province_string": "浙江省",
+                        "status": 0,
+                        "status_string": "未知",
+                        "user_id": 12341,
+                        "recipient_id_card": "500239199005080018"
+                      }
+                    ],
+                    "message": ""
+                  }
+          421:
+            description: "1000表示该用户不存在"
+            body:
+              application/json:
+                type: no_such_user_code_response
+          422:
+            description: "1010表示该地址不存在"
+            body:
+              application/json:
+                type: no_address_code_response
+    put:
+      description: "用户修改地址信息"
+      body:
+        application/json:
+          type: Address_Update
+      responses:
+        200:
+          description: "0表示用户修改地址信息成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1表示body中login_token或者id不能为null"
+          body:
+            application/json:
+              type: required_missing_code_response
+        422:
+          description: "2表示body中login_token与id不匹配"
+          body:
+            application/json:
+              type: input_invalid_code_response
+        423:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_code_response
+        424:
+          description: "1010表示该地址不存在"
+          body:
+            application/json:
+              type: no_address_code_response
+  post:
+    description: "终端用户注册"
+    body:
+      application/json:
+        type: User_Add
+    responses:
+      200:
+        description: "0表示终端用户注册成功"
+        body:
+          application/json:
+            properties:
+              code:
+                required: true
+                description: "响应码"
+                type: "integer"
+              data:
+                type: User_Detailed_Response
+              message:
+                required: true
+                description: ""
+                type: "string" 
+            example: |
+              {
+                "code": 0,
+                "data": {
+                  "id": 123123,
+                  "open_id": "12123123",
+                  "nick_name": "test",
+                  "gender": 1,
+                  "language": "中文",
+                  "city": "杭州市",
+                  "province": "浙江省",
+                  "country": "CN",
+                  "avatar_url": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTINb3EmV5q6yvAicboTIYOok83uhyHGy7Nx6CrklJ8rxX4QO7Gu6rAJFl2u7L28OrUrQO00EQN0rRA/132",
+                  "login_token": "61ffdc90-352b-4137-85a4-db87e92724b0",
+                  "membership": true,
+                  "member_rank": 12,
+                  "has_bind_referrer": true,
+                  "member_current_block_amount": 100,
+                  "rewarded_token": 100,
+                  "reward_money_pending": 100,
+                  "reward_money_withdraw_pending": 100,
+                  "reward_money_total": 1000,
+                  "referrer_id": 123132,
+                  "is_vip": false
+                },
+                "message": ""
+              }
+      421:
+        description: "1表示输入数据不全"
+        body:
+          application/json:
+            type: required_missing_code_response
+      422:
+        description: "2表示用户已经注册过"
+        body:
+          application/json:
+            type: input_invalid_code_response
+  /login:
+    post:
+      description: "终端用户登录"
+      body:
+        application/json:
+          type: User_Login
+      responses:
+        200:
+          description: "0表示登录成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: User_Detailed_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 123123,
+                    "open_id": "12123123",
+                    "nick_name": "test",
+                    "gender": 1,
+                    "language": "中文",
+                    "city": "杭州市",
+                    "province": "浙江省",
+                    "country": "CN",
+                    "avatar_url": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTINb3EmV5q6yvAicboTIYOok83uhyHGy7Nx6CrklJ8rxX4QO7Gu6rAJFl2u7L28OrUrQO00EQN0rRA/132",
+                    "login_token": "61ffdc90-352b-4137-85a4-db87e92724b0",
+                    "membership": true,
+                    "member_rank": 12,
+                    "has_bind_referrer": true,
+                    "member_current_block_amount": 100,
+                    "rewarded_token": 100,
+                    "reward_money_pending": 100,
+                    "reward_money_withdraw_pending": 100,
+                    "reward_money_total": 1000,
+                    "referrer_id": 123132,
+                    "is_vip": false
+                  },
+                  "message": ""
+                }
+        500:
+          description: "-1表示服务器端内部错误"
+          body:
+            application/json:
+              type: internal_error_code_response
+        421:
+          description: "2表示输入数据无法处理"
+          body:
+            application/json:
+              type: input_invalid_code_response
+  /bind_referrer:
+    post:
+      description: "终端用户绑定会员"
+      body:
+        application/json:
+          type: User_Bind_Referrer
+      responses:
+        200:
+          description: "0表示绑定会员成功"
+          body:
+            application/json:
+              type: success_response
+        500:
+          description: "-1表示服务器端内部错误"
+          body:
+            application/json:
+              type: internal_error_code_response
+        421:
+          description: "2表示输入数据无法处理"
+          body:
+            application/json:
+              type: input_invalid_code_response
+  /register_member:
+    post:
+      description: "终端用户注册会员"
+      body:
+        application/json:
+          type: User_Register_Member
+      responses:
+        200:
+          description: "0表示注册会员成功"
+          body:
+            application/json:
+              type: success_response
+        421:
+          description: "1表示输入数据不全"
+          body:
+            application/json:
+              type: required_missing_response
+        422:
+          description: "2表示输入数据无法处理"
+          body:
+            application/json:
+              type: input_invalid_code_response 
+        423:
+          description: "1001表示管理员登录token无效"
+          body:
+            appliation/json:
+              type: login_token_invalid_code_response
+        424:
+          description: "1002表示会员验证码失效"
+          body:
+            application/json:
+              type: invite_code_invalid_code_Response
+  /info:
+    get:
+      description: "获取终端用户实时信息"
+      queryParameters:
+        login_token:
+          type: user_token
+      responses:
+        200:
+          description: "0表示获取终端用户实时信息成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: User_Info_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string"
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "id": 1231,
+                    "login_token": "61ffdc90-352b-4137-85a4-db87e92724b0",
+                    "membership": false,
+                    "member_rank": -1,
+                    "has_bind_referrer": false,
+                    "member_current_block_amount": 0,
+                    "rewarded_token": 0,
+                    "reward_money_pending": 0,
+                    "reward_money_balance": 0,
+                    "reward_money_withdraw_pending": 0,
+                    "reward_money_total": 0,
+                    "referrer_id": 12312,
+                    "member_potential_rank": -1,
+                    "member_current_block_rank": -1,
+                    "reward_current_ratio": 0
+                  },
+                  "message": "success"
+                }
+        404:
+          description: "404表示暂无数据"
+          body:
+            application/json:
+              example: |
+                {
+                  "code": 404,
+                  "message": "暂无数据"
+                }
+  /mining_log:
+    get:
+      queryParameters:
+        login_token:
+          type: user_token
+        page:
+          type: page
+        page_size:
+          type: page_size
+      responses:
+        200:
+          description: "0表示查询会员积分批次成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Member_Mining_Action_Log_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string"
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 1231,
+                      "block_id": 1231,
+                      "member_id": 12311,
+                      "contribution_amount": 100,
+                      "granted_tokens": 0,
+                      "current_block_rank": 0,
+                      "current_block_ratio": 0,
+                      "create_time": "2019-4-20 6:6:6",
+                      "type": 1
+                    }
+                  ],
+                  "message": ""
+                }
+        422:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_list_response
+  /reward_log:
+    get:
+      description: "会员查询提现记录"
+      queryParameters:
+        login_token:
+          type: user_token
+        page:
+          type: page
+        page_size:
+          type: page_size
+      responses:
+        200:
+          description: "0表示会员查询提现记录成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Member_Reward_Action_Log_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string"
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "id": 12312,
+                      "member_id": 12312,
+                      "referee_id": 12323,
+                      "goods_id": 12321,
+                      "goods_number": 2,
+                      "property": "10563:41488",
+                      "order_id": 12312,
+                      "action_type": 0,
+                      "action_type_string": "pending",
+                      "amount": 12,
+                      "create_time": "2019-4-21 6:6:6"
+                    }
+                  ],
+                  "message": ""
+                }
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_list_response
+  /favorite_goods:
+    /add:
+      post:
+        description: "用户收藏商品"
+        queryParameters:
+          goods_id:
+            type: goods_id
+          login_token:
+            type: user_token
+        responses:
+          200:
+            description: "0表示收藏商品成功"
+            body:
+              application/json:
+                type: success_response
+          421:
+            description: "1000表示该用户不存在"
+            body:
+              application/json:
+                type: no_such_user_code_response
+          422:
+            description: "1008表示该商品不存在"
+            body:
+              application/json:
+                type: no_such_goods_code_response
+    /list:
+      get:
+        description: "用户查看收藏的商品"
+        queryParameters:
+          login_token:
+            type: user_token
+        responses:
+          200:
+            description: "用户查询收藏的商品成功"
+            body:
+              application/json:
+                properties:
+                  code:
+                    required: true
+                    description: "响应码"
+                    type: "integer"
+                  data:
+                    type: Favorite_goods_Response[]
+                  message:
+                    required: true
+                    description: ""
+                    type: "string"
+                example: |
+                  {
+                    "code": 0,
+                    "data": [
+                      {
+                        "user_id": 121,
+                        "goods_id": 1231,
+                        "create_time": "2019-4-21 6:6:6",
+                        "update_time": "2019-4-21 6:6:6"
+                      }
+                    ],
+                    "message": ""
+                  }
+          500:
+            description: "-1表示收藏的商品不存在"
+            body: 
+              application/json:
+                type: internal_error_list_response
+          421:
+            description: "1000表示该用户不存在"
+            body:
+              application/json:
+                type: no_such_user_list_response
+    /check:
+      get:
+        description: "用户商品是否被收藏"
+        queryParameters: 
+          login_token:
+            type: user_token
+          goods_id:
+            type: goods_id
+        responses:
+          200:
+            description: "0表示该商品已收藏"
+            body: 
+              application/json:
+                type: success_response
+          421:
+            description: "1000表示该用户不存在"
+            body:
+              appliation/json:
+                type: no_such_user_code_response
+          422:
+            description: "1006该用户没有该收藏品"
+            body:
+              application/json:
+                type: no_favorite_goods_code_response
+    /delete:
+      delete:
+        description: "用户删除收藏品"
+        queryParameters:
+          login_token:
+            type: user_token
+          goods_id:
+            type: goods_id
+        responses:
+          204:
+            description: "0表示用户删除收藏品成功"
+            body:
+              application/json:
+                example: |
+                  {
+                    "code": 0,
+                    "message": "success"
+                  }
+  /token_rank_list:
+    get:
+      description: "用户查询排名, 最多查询20个条目"
+      responses:
+        200:
+          description: "0表示用户查询排名成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: User_Rank_Response[]
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": [
+                    {
+                      "avatar_url": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTINb3EmV5q6yvAicboTIYOok83uhyHGy7Nx6CrklJ8rxX4QO7Gu6rAJFl2u7L28OrUrQO00EQN0rRA/132",
+                      "rewarded_token": 100,
+                      "nick_name": "test"
+                    }
+                  ],
+                  "message": ""
+                }
+        421:
+          description: "1000表示没有该用户"
+          body:
+            application/json:
+              type: no_such_user_list_response
+  /invite_code:
+    get:
+      description: "会员查询邀请码"
+      queryParameters: 
+        login_token:
+          type: user_token
+      responses: 
+        200:
+          description: "0表示会员查询邀请码成功"
+          body:
+            application/json:
+              properties:
+                code:
+                  required: true
+                  description: "响应码"
+                  type: "integer"
+                data:
+                  type: Invite_Code_Response
+                message:
+                  required: true
+                  description: ""
+                  type: "string" 
+              example: |
+                {
+                  "code": 0,
+                  "data": {
+                    "invite_code": "09YSU",
+                    "belongs_to": 699425
+                  },
+                  "message": ""
+                }
+        421:
+          description: "1000表示该用户不存在"
+          body:
+            application/json:
+              type: no_such_user_response
+        422:
+          description: "1002表示该邀请码不存在"
+          body:
+            application/json:
+              type: invite_code_invalid_Response
