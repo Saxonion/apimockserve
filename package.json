@@ -2,7 +2,7 @@
   "name": "node-server",
   "version": "1.0.0",
   "description": "api + mock",
-  "main": "app.html",
+  "main": "index.js",
   "scripts": {
     "raml": "raml2html api.raml > index.html",
     "serve": "node app.js",
